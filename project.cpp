@@ -99,8 +99,30 @@ Token* getAssignmentStatements(TokenList &tokenList)
 		// Place the token values into the temp_string
 		temp_string = temp_string + temp_token->getStringRep();
 
+		// The Beginning of assingment statement.
+		if (temp_token->getStringRep() == "include")
+		{
+			// These if-elseif functions should be be run like an array or something
+		}
+
+		else if (temp_token->getStringRep() == "if")
+		{
+
+		}
+
+		/*
+		Special cases are:
+		#include
+		if and else-if statements
+		while
+		functions
+		class
+		namespace
+		*/
+
+
 		// End of assignment statement. Place the assignment into assignment_token and clears the string
-		if (temp_token->getStringRep() == ";")
+		else if (temp_token->getStringRep() == ";")
 		{
 			assignment_token.append(temp_string);
 			temp_string.clear();
@@ -182,6 +204,5 @@ int main()
 		cout << aListPtr->getStringRep() << " ";
 		aListPtr = aListPtr->getNext();
 	}
-
 	return 0;
 }

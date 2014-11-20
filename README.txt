@@ -7,10 +7,13 @@ Author: Choong Jin Ng (301226977)
 
 Credits to: Daryl and Jason, for allowing us to modify their parcer class for this assignment
 
-
+General:
+Jin:	I'm thinking of implementing a new header file and a new cpp to implement the features of the compiler.
+		No point creating a huge class for everything. What do you think?
 
 Part 1:
-Mostly done. TA pointed out that this does not work if (bla bla) a = 0;
+Jin:	Mostly done, TA pointed out that this does not work if (bla bla) a = 0 (unresolved)
+		Listed some possibilities at the getAssignmentStatements function (unresolved)
 
 Part 2:
 
