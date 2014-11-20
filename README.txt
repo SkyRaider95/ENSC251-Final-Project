@@ -9,7 +9,7 @@ Credits to: Daryl and Jason, for allowing us to modify their parcer class for th
 
 General:
 Jin:	I'm thinking of implementing a new header file and a new cpp to implement the features of the compiler.
-		No point creating a huge class for everything. What do you think?
+		No point creating a huge class for everything. What do you think? I created advancedParserClasses for this purpose.
 
 Part 1:
 Jin:	Mostly done, TA pointed out that this does not work if (bla bla) a = 0 (unresolved)
