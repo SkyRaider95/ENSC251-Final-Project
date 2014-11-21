@@ -9,6 +9,7 @@ Steven Luu    301150253
 
 //Use only the following three libraries:
 #include "parserClasses.h"
+#include "advancedParserClasses.h"
 #include <iostream>
 #include <fstream>
 
@@ -99,12 +100,16 @@ Token* getAssignmentStatements(TokenList &tokenList)
 		// Place the token values into the temp_string
 		temp_string = temp_string + temp_token->getStringRep();
 
-		// The Beginning of assingment statement.
-		if (temp_token->getStringRep() == "include")
+		// Library Declaration
+		if (temp_token->getStringRep() == "#")
 		{
-			// These if-elseif functions should be be run like an array or something
+			while (true)
+			{
+
+			}
 		}
 
+		// These if-elseif functions should be be run like an array or something
 		else if (temp_token->getStringRep() == "if")
 		{
 

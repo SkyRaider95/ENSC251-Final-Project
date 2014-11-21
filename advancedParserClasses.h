@@ -10,6 +10,7 @@ Steven Luu    (301150253)
 #include <string>
 #include <cctype>
 #include "lexemesTypes.h"
+#include "parserClasses.h"
 
 using namespace std;
 
@@ -25,10 +26,13 @@ namespace ensc251_advancedparserclass
 	// Class Identify checks the assignment statements, and for functions 
 	class Identify
 	{
+		friend class Clippy;
+
 	private:
+		bool endQuote; // When false, it is the end of a quote or not a quote (e.g "). When true, it is inside a quote
 	public:
 		Identify();
-		void AssignmentStatements();
+		Token* AssignmentStatements(TokenList &tokenList);
 		void FunctionStatements();
 		void LogicStatements();
 
