@@ -12,8 +12,8 @@ Jin:	I'm thinking of implementing a new header file and a new cpp to implement t
 		No point creating a huge class for everything. What do you think? I created advancedParserClasses for this purpose.
 
 Part 1:
-Jin:	Mostly done, TA pointed out that this does not work if (bla bla) a = 0 (unresolved)
-		Listed some possibilities at the getAssignmentStatements function (unresolved)
+Jin:	Mostly done, TA pointed out that this does not work if (bla bla) a = 0 (resolved)
+		Listed some possibilities at the getAssignmentStatements function (resolved)
 
 Part 2:
 
