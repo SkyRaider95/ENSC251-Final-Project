@@ -6,6 +6,7 @@ Steven Luu    (301150253)
 
 #include <string>
 #include <cctype>
+#include <iostream>
 #include "lexemesTypes.h"
 #include "advancedParserClasses.h"
 #include "parserClasses.h"
@@ -57,6 +58,20 @@ namespace ensc251_advancedparserclass
 
 	// **** Clippy ****
 
+	// Default constructor
+	Clippy::Clippy() : syntaxError_Found(false), logicError_Found(false)
+	{
+	}
+
+	// Handles the bulk of the checking process
+	void Clippy::errorAssistant()
+	{
+
+
+		// If a function is found
+
+	}
+
 	// Input: string
 	// Output: Returns true if the conditional statement is found
 	bool Clippy::checkConditionalStatement(const string &str)
@@ -107,6 +122,45 @@ namespace ensc251_advancedparserclass
 
 		temp_string.clear();
 		return true;
+	}
+
+	// Input: First half of punctuator (e.g ", <)
+	// Output: Returns true if found. Otherwise, returns false
+	bool checkSecondHalf(const char &first_half, const string &str)
+	{
+		char second_half = NULL;
+
+		if (first_half == '<')
+		{
+			second_half = '>';
+		}
+
+		else if (first_half == '"')
+		{
+			second_half = first_half;
+		}
+
+		else if (first_half == '\'')
+		{
+			second_half = '\'';
+		}
+
+		// Invalid
+		if (second_half == NULL)
+		{
+			cerr << "ERROR! Invalid first_half" << endl;
+			return false;
+		}
+
+		for (int ii = 0; ii != str.length(); ii++)
+		{
+			if (second_half == str[ii])
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 } // end of namespace ensc251_advancedparserclass

@@ -9,6 +9,7 @@ Steven Luu    (301150253)
 
 #include <string>
 #include <cctype>
+#include <iostream>
 #include "lexemesTypes.h"
 #include "parserClasses.h"
 
@@ -44,10 +45,17 @@ namespace ensc251_advancedparserclass
 	class Clippy
 	{
 	private:
+		bool syntaxError_Found; // True if a syntax error is found
+		bool logicError_Found; // True if a logic error is found
 	public:
+		Clippy();
+		void errorAssistant();
+
 		bool checkConditionalStatement(const string &str);
 		bool checkJumpConditional(const string &str);
 		bool includeStatement(const string &str);
+
+		bool checkSecondHalf(const char &first_half, const string &str);
 	}; // end of Class Clippy
 
 } // end of namespace ensc251_advancedparserclass
