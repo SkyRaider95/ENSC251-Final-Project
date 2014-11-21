@@ -36,7 +36,7 @@ namespace ensc251_advancedparserclass
 	public:
 		Identify();
 		Token* AssignmentStatements(TokenList &tokenList);
-		void FunctionStatements();
+		Token* FunctionStatements(TokenList &tokenList);
 		void LogicStatements();
 
 	}; // end of class Identify

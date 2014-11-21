@@ -88,77 +88,27 @@ int removeBlockComments(TokenList &tokenList)
 //NOTE: Assignment statement must end with a semi-colon
 //@ description: extract all the assignment statements from input token list, prepare a new token list (assignment list)
 //using extracted statements and return the head pointer to it
-/*Token* getAssignmentStatements(TokenList &tokenList)
-{
-	// Creation of Assignment statements
-	TokenList assignment_token;
-	Token *temp_token = tokenList.getFirst();
-	string temp_string;
-
-	while (temp_token)
-	{
-		// Place the token values into the temp_string
-		temp_string = temp_string + temp_token->getStringRep();
-
-		// Library Declaration
-		if (temp_token->getStringRep() == "#")
-		{
-			while (true)
-			{
-
-			}
-		}
-
-		// These if-elseif functions should be be run like an array or something
-		else if (temp_token->getStringRep() == "if")
-		{
-
-		}
-
-		
-		Special cases are:
-		#include
-		if and else-if statements
-		while
-		functions
-		class
-		namespace
-		
-
-
-		// End of assignment statement. Place the assignment into assignment_token and clears the string
-		else if (temp_token->getStringRep() == ";")
-		{
-			assignment_token.append(temp_string);
-			temp_string.clear();
-		}
-
-		// Next string
-		temp_token = temp_token->getNext();
-	}
-
-	//return NULL;
-	return (assignment_token.getFirst());
-}// end of getAssignmentStatements
-*/
-
 Token* getAssignmentStatements(TokenList &tokenList)
 {
 	// Creation of Assignment statements
 	TokenList assignment_token;
 	Token *temp_token = tokenList.getFirst();
+
 	//Traversing through the list
 	while (temp_token)
 	{		
-	//Checking for assignment operator "="
+		
+		//Checking for assignment operator "="
 		if (temp_token->getStringRep() == "=")
 		{
 			assignment_token.append(temp_token->getPrev());
+
 			//Adds tokens to the list until it finds the end of the statement;
-			while(temp_token->getStringRep() != ";")
+			while (temp_token->getStringRep() != ";")
 			{
 				assignment_token.append(temp_token->getStringRep());
 				temp_token = temp_token->getNext();
+
 				//When semicolon is found, append it to the list and the loop is over
 				if (temp_token->getStringRep() == ";")
 				{
@@ -166,12 +116,15 @@ Token* getAssignmentStatements(TokenList &tokenList)
 				}
 			}
 		}
-	// Next token 
+		
+		// Next token 
 		temp_token = temp_token->getNext();
+
 	}
+
 	// Return token list;
 	return (assignment_token.getFirst());
-}
+} // end of getAssignmentStatements
 
 //Example Test code for interacting with your Token, TokenList, and Tokenizer classes
 //Add your own code to further test the operation of your Token, TokenList, and Tokenizer classes

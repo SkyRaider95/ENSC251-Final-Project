@@ -24,37 +24,64 @@ namespace ensc251_advancedparserclass
 
 	}
 
-
-	Token* Identify::AssignmentStatements(TokenList &tokenList)
+	//Input: a list of tokens
+	//Output: head pointer to the list of assignment statements
+	//NOTE: Assignment statement must end with a semi-colon
+	//@ description: extract all the assignment statements from input token list, prepare a new token list (assignment list)
+	//using extracted statements and return the head pointer to it
+	Token* getAssignmentStatements(TokenList &tokenList)
 	{
 		// Creation of Assignment statements
 		TokenList assignment_token;
 		Token *temp_token = tokenList.getFirst();
-		string temp_string;
 
+		//Traversing through the list
 		while (temp_token)
 		{
-			// Place the token values into the temp_string
-			temp_string = temp_string + temp_token->getStringRep();
 
-			// End of assignment statement. Place the assignment into assignment_token and clears the string
-			if (temp_token->getStringRep() == ";")
+			//Checking for assignment operator "="
+			if (temp_token->getStringRep() == "=")
 			{
-				assignment_token.append(temp_string);
-				temp_string.clear();
+				assignment_token.append(temp_token->getPrev());
+
+				//Adds tokens to the list until it finds the end of the statement;
+				while (temp_token->getStringRep() != ";")
+				{
+					assignment_token.append(temp_token->getStringRep());
+					temp_token = temp_token->getNext();
+
+					//When semicolon is found, append it to the list and the loop is over
+					if (temp_token->getStringRep() == ";")
+					{
+						assignment_token.append(temp_token->getStringRep());
+					}
+				}
 			}
 
-			// Next string
+			// Next token 
 			temp_token = temp_token->getNext();
 		}
 
+		// Return token list;
 		return (assignment_token.getFirst());
-	} // end of AssignmentStatements
+	} // end of getAssignmentStatements
 
-	void Identify::FunctionStatements()
+	Token* Identify::FunctionStatements(TokenList &tokenList)
 	{
+		TokenList assignment_token;
+		Token *temp_token = tokenList.getFirst();
+		string temp_string;
 
-	}
+		bool start_of_function;
+
+		while (temp_token)
+		{
+			temp_token = temp_token->getNext();
+		}
+
+
+		return (assignment_token.getFirst());
+	} // end of FunctionStatements
 
 	// **** Clippy ****
 
@@ -69,7 +96,6 @@ namespace ensc251_advancedparserclass
 
 
 		// If a function is found
-
 	}
 
 	// Input: string

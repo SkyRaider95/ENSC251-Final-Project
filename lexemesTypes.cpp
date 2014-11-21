@@ -17,13 +17,6 @@ namespace ensc251
 	//***Complete the implementation of the following functions: ***
 
 	//This function returns TRUE if the input is identifier else FALSE
-	/*bool isIdentifier(const string &lexeme)
-	{
-		return false;
-	} // end of isIdentifier
-	*/
-
-	//This function returns TRUE if the input is identifier else FALSE
 	bool isIdentifier(const string &lexeme)
 	{
 		int ii = 0;
@@ -48,11 +41,14 @@ namespace ensc251
 							ii++;
 						}
 					}
+
 					if (ii >= lexeme.length())
 					{
 						return true;
 					}
+
 				}
+
 				//For the single char names
 				if (ii == lexeme.length())
 				{
@@ -61,7 +57,8 @@ namespace ensc251
 			}
 		}
 		return false;
-  }
+
+  } // end of isIdentifier
 
 	//This function returns TRUE if the input is one of the operators defined in the variable
 	//"tableOfOperators" in "lexemesTypes.h" else it returns FALSE
@@ -141,56 +138,12 @@ namespace ensc251
 		}
 		return true;
 	} // end of isDigitLiteral
-
-	/*
-	bool isIntegerLiteral(const string &lexeme)
-	{
-		int ii = 0;
-
-		//Checks for hex literal then moves onto next char in string
-		for (int i = 0; i < numElement_hexStuff; i++)
-		{
-			if (lexeme.at(ii) == hexStuff[i])
-			{
-				ii++;
-			}
-		}
-
-		//Function then proceeds as normal
-		//Function runs through string to check if all chars are integer values
-		while (ii < lexeme.length())	//Checks length of the string
-		{
-			//Checks if the char is an integer value
-			for (int j = 0; j < numElement_numberStuff; j++)
-			{
-				//Moves onto next char of string if it is an integer
-				if (lexeme.at(ii) == numberStuff[j])
-				{
-					ii++;
-				}
-			}
-
-			//If all char are integers then the string is an integer literal
-			if (ii == lexeme.length() - 1)
-			{
-				return true;
-			}
-
-			// Finishes before the end of string
-			else if (ii = !lexeme.length() - 1)
-			{
-				return false;
-			}
-		}
-		return false;
-	} // end of isIntegerLiteral
-
-	*/
 	
 	//This function returns TRUE if the input is integer literal else FALSE
 	bool isIntegerLiteral(const string &lexeme)
 	{
 	  int ii = 0;
+
 	  //Checks for hex literal then moves onto next char in string
 	  //Need to fix 
 	  //Searches for 0,x,X
@@ -202,10 +155,11 @@ namespace ensc251
 			  {
 				  if (lexeme.at(ii) == hexStuff[h])
 				  {
-					  ii + 2;
+					  ii = ii + 2;
 				  }
 			  }
 		  }
+
 		  //Function then proceeds as normal
 		  //Checks the length of the string
 		  for (int jj = ii; jj != lexeme.length(); jj++)
@@ -217,6 +171,7 @@ namespace ensc251
 				  {
 					  ii++;
 				  }
+
 				  for (int hh = 0; hh != numElement_hexStuff; hh++)
 				  {
 					  if (lexeme.at(jj) == hexStuff[hh])
@@ -225,6 +180,7 @@ namespace ensc251
 					  }
 				  }
 			  }
+
 			  if (ii >= lexeme.length())
 			  {
 				  return true;
@@ -232,8 +188,9 @@ namespace ensc251
 		  }
 		  return false;
 	  }
-		
-	}
+
+	  return false;
+	} // end of isIntegerLiteral
 
 	bool isFloatLiteral(const string &lexeme)
 	{
