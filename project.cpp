@@ -88,7 +88,7 @@ int removeBlockComments(TokenList &tokenList)
 //NOTE: Assignment statement must end with a semi-colon
 //@ description: extract all the assignment statements from input token list, prepare a new token list (assignment list)
 //using extracted statements and return the head pointer to it
-Token* getAssignmentStatements(TokenList &tokenList)
+/*Token* getAssignmentStatements(TokenList &tokenList)
 {
 	// Creation of Assignment statements
 	TokenList assignment_token;
@@ -115,7 +115,7 @@ Token* getAssignmentStatements(TokenList &tokenList)
 
 		}
 
-		/*
+		
 		Special cases are:
 		#include
 		if and else-if statements
@@ -123,7 +123,7 @@ Token* getAssignmentStatements(TokenList &tokenList)
 		functions
 		class
 		namespace
-		*/
+		
 
 
 		// End of assignment statement. Place the assignment into assignment_token and clears the string
@@ -140,6 +140,38 @@ Token* getAssignmentStatements(TokenList &tokenList)
 	//return NULL;
 	return (assignment_token.getFirst());
 }// end of getAssignmentStatements
+*/
+
+Token* getAssignmentStatements(TokenList &tokenList)
+{
+	// Creation of Assignment statements
+	TokenList assignment_token;
+	Token *temp_token = tokenList.getFirst();
+	//Traversing through the list
+	while (temp_token)
+	{		
+	//Checking for assignment operator "="
+		if (temp_token->getStringRep() == "=")
+		{
+			assignment_token.append(temp_token->getPrev());
+			//Adds tokens to the list until it finds the end of the statement;
+			while(temp_token->getStringRep() != ";")
+			{
+				assignment_token.append(temp_token->getStringRep());
+				temp_token = temp_token->getNext();
+				//When semicolon is found, append it to the list and the loop is over
+				if (temp_token->getStringRep() == ";")
+				{
+					assignment_token.append(temp_token->getStringRep());
+				}
+			}
+		}
+	// Next token 
+		temp_token = temp_token->getNext();
+	}
+	// Return token list;
+	return (assignment_token.getFirst());
+}
 
 //Example Test code for interacting with your Token, TokenList, and Tokenizer classes
 //Add your own code to further test the operation of your Token, TokenList, and Tokenizer classes
