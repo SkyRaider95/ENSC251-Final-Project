@@ -36,30 +36,8 @@ namespace ensc251_advancedparserclass
 			// Place the token values into the temp_string
 			temp_string = temp_string + temp_token->getStringRep();
 
-			// Library Declaration
-			if (temp_token->getStringRep() == "#")
-			{
-			}
-
-			// These if-elseif functions should be be run like an array or something
-			else if (temp_token->getStringRep() == "if")
-			{
-
-			}
-
-			/*
-			Special cases are:
-			#include
-			if and else-if statements
-			while
-			functions
-			class
-			namespace
-			*/
-
-
 			// End of assignment statement. Place the assignment into assignment_token and clears the string
-			else if (temp_token->getStringRep() == ";")
+			if (temp_token->getStringRep() == ";")
 			{
 				assignment_token.append(temp_string);
 				temp_string.clear();
@@ -79,7 +57,38 @@ namespace ensc251_advancedparserclass
 
 	// **** Clippy ****
 
-	// Input: Assignment Statement
+	// Input: string
+	// Output: Returns true if the conditional statement is found
+	bool Clippy::checkConditionalStatement(const string &str)
+	{
+		for (int ii = 0; ii != numElements_keyWords_conditional; ii++)
+		{
+			// Matches a conditional keyword
+			if (str == keyWords_conditional[ii])
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// Input: string
+	// Output: Returns true if jump conditional statement is found. Returns false otherwise
+	bool Clippy::checkJumpConditional(const string &str)
+	{
+		for (int ii = 0; ii != numElements_keyWords_jumpConditional; ii++)
+		{
+			//Matches a conditional jump statement
+			if (str == keyWords_jumpConditional[ii])
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	// Input: string
 	// Output: Returns true if the library declaration is defined correctly, returns false otherwise
 	bool Clippy::includeStatement(const string &str)
 	{

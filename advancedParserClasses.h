@@ -17,10 +17,12 @@ using namespace std;
 namespace ensc251_advancedparserclass
 {
 	// Public Constants and Arrays
-	const string keyWords_logic [] = { "if", "else if", "else", "for", "while" };
+	const string keyWords_conditional [] = { "if", "else if", "else", "for", "while", "do", "switch" };
+	const string keyWords_jumpConditional [] = { "break", "continue" };
 	const string keyWords_function [] = {"hello"};
 
-	const int numElements_keyWords_logic = 5;
+	const int numElements_keyWords_conditional = 7;
+	const int numElements_keyWords_jumpConditional = 2;
 	const int numElements_keyWords_function = 1;
 
 	// Class Identify checks the assignment statements, and for functions 
@@ -43,7 +45,8 @@ namespace ensc251_advancedparserclass
 	{
 	private:
 	public:
-		void checkLogicStatement();
+		bool checkConditionalStatement(const string &str);
+		bool checkJumpConditional(const string &str);
 		bool includeStatement(const string &str);
 	}; // end of Class Clippy
 
