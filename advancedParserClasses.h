@@ -16,7 +16,11 @@ using namespace std;
 namespace ensc251_advancedparserclass
 {
 	// Public Constants and Arrays
+	const string keyWords_logic [] = { "if", "else if", "else", "for", "while" };
+	const string keyWords_function [] = {"hello"};
 
+	const int numElements_keyWords_logic = 5;
+	const int numElements_keyWords_function = 1;
 
 	// Class Identify checks the assignment statements, and for functions 
 	class Identify
@@ -26,6 +30,7 @@ namespace ensc251_advancedparserclass
 		Identify();
 		void AssignmentStatements();
 		void FunctionStatements();
+		void LogicStatements();
 
 	}; // end of class Identify
 
@@ -34,6 +39,8 @@ namespace ensc251_advancedparserclass
 	{
 	private:
 	public:
+		void checkLogicStatement();
+		bool includeStatement(const string &str);
 	}; // end of Class Clippy
 
 } // end of namespace ensc251_advancedparserclass

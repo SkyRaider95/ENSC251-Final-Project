@@ -22,6 +22,32 @@ namespace ensc251_advancedparserclass
 
 	} // end of AssignmentStatements
 
+	void Identify::FunctionStatements()
+	{
+
+	}
+
 	// **** Clippy ****
+
+	// Input: Assignment Statement
+	// Output: Returns true if the include is defined correctly, returns false otherwise
+	bool Clippy::includeStatement(const string &str)
+	{
+		string temp_string;
+		// Reading each character of the string
+		for (int ii = 0; ii != str.length(); ii++)
+		{
+			temp_string =temp_string + str[ii];
+
+			// #include is missing
+			if (ii == 7 && temp_string != "#include")
+			{
+				return false;
+			}
+		}
+
+		temp_string.clear();
+		return true;
+	}
 
 } // end of namespace ensc251_advancedparserclass
