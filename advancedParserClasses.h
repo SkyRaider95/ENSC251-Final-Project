@@ -26,13 +26,16 @@ namespace ensc251_advancedparserclass
 	const int numElements_keyWords_jumpConditional = 2;
 	const int numElements_keyWords_function = 1;
 
-	// Class Identify checks the assignment statements, and for functions 
+	// Class Identify checks the assignment statements and function declarations
 	class Identify
 	{
 		friend class Clippy;
 
 	private:
 		bool endQuote; // When false, it is the end of a quote or not a quote (e.g "). When true, it is inside a quote
+		int numAssignmentStatements = 0; // Number of assignment statements
+		int numFunctionDeclarations = 0; // Number of functions
+		int numTokensParsed = 0; // Number of tokens parsed
 	public:
 		Identify();
 		Token* getAssignmentStatements(TokenList &tokenList);
@@ -50,6 +53,8 @@ namespace ensc251_advancedparserclass
 	public:
 		Clippy();
 		void errorAssistant();
+
+		void checkFunctionImplementation();
 
 		bool checkConditionalStatement(const string &str);
 		bool checkJumpConditional(const string &str);

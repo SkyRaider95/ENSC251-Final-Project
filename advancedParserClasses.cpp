@@ -29,7 +29,7 @@ namespace ensc251_advancedparserclass
 	//NOTE: Assignment statement must end with a semi-colon
 	//@ description: extract all the assignment statements from input token list, prepare a new token list (assignment list)
 	//using extracted statements and return the head pointer to it
-	Token* getAssignmentStatements(TokenList &tokenList)
+	Token* Identify::getAssignmentStatements(TokenList &tokenList)
 	{
 		// Creation of Assignment statements
 		TokenList assignment_token;
@@ -54,6 +54,7 @@ namespace ensc251_advancedparserclass
 					if (temp_token->getStringRep() == ";")
 					{
 						assignment_token.append(temp_token->getStringRep());
+						numAssignmentStatements = numAssignmentStatements + 1;
 					}
 				}
 			}
@@ -92,6 +93,7 @@ namespace ensc251_advancedparserclass
 					if (temp_token->getStringRep() == ")")
 					{
 						function_declaration_token.append(temp_token->getStringRep());
+						numFunctionDeclarations = numFunctionDeclarations + 1;
 					}
 				}
 			}
@@ -117,6 +119,12 @@ namespace ensc251_advancedparserclass
 
 
 		// If a function is found
+	}
+
+	// Checks the function implementation
+	void Clippy::checkFunctionImplementation()
+	{
+
 	}
 
 	// Input: string
@@ -146,7 +154,6 @@ namespace ensc251_advancedparserclass
 				return true;
 			}
 		}
-
 		return false;
 	}
 
@@ -166,7 +173,6 @@ namespace ensc251_advancedparserclass
 				return false;
 			}
 		}
-
 		temp_string.clear();
 		return true;
 	}
