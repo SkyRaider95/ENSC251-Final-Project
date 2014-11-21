@@ -66,21 +66,42 @@ namespace ensc251_advancedparserclass
 		return (assignment_token.getFirst());
 	} // end of getAssignmentStatements
 
-	Token* Identify::FunctionStatements(TokenList &tokenList)
+	//Input: a list of tokens
+	//Output: head pointer to the list of function declaration
+	//NOTE: Function declarations end at right parathesis
+	Token* Identify::getFunctionDeclarations(TokenList &tokenList)
 	{
-		TokenList assignment_token;
+		// Creation of Function Declaration statements
+		TokenList function_declaration_token;
 		Token *temp_token = tokenList.getFirst();
-		string temp_string;
-
-		bool start_of_function;
 
 		while (temp_token)
 		{
+			//Checking for left parenthesis
+			if (temp_token->getStringRep() == "(")
+			{
+				function_declaration_token.append(temp_token->getPrev());
+
+				//Adds tokens to the list until it finds the end of the statement;
+				while (temp_token->getStringRep() != ")")
+				{
+					function_declaration_token.append(temp_token->getStringRep());
+					temp_token = temp_token->getNext();
+
+					//When right parenthesis is found, append it to the list and the loop is over
+					if (temp_token->getStringRep() == ")")
+					{
+						function_declaration_token.append(temp_token->getStringRep());
+					}
+				}
+			}
+
+			// Next token 
 			temp_token = temp_token->getNext();
 		}
 
-
-		return (assignment_token.getFirst());
+		// Return token list;
+		return (function_declaration_token.getFirst());
 	} // end of FunctionStatements
 
 	// **** Clippy ****

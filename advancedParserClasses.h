@@ -35,8 +35,8 @@ namespace ensc251_advancedparserclass
 		bool endQuote; // When false, it is the end of a quote or not a quote (e.g "). When true, it is inside a quote
 	public:
 		Identify();
-		Token* AssignmentStatements(TokenList &tokenList);
-		Token* FunctionStatements(TokenList &tokenList);
+		Token* getAssignmentStatements(TokenList &tokenList);
+		Token* getFunctionDeclarations(TokenList &tokenList);
 		void LogicStatements();
 
 	}; // end of class Identify
