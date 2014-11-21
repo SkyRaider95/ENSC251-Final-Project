@@ -259,7 +259,7 @@ namespace ensc251
 						}
 					}
 
-					if (ii == lexeme.length())
+					if (ii >= lexeme.length())
 					{
 						return true;
 					}
