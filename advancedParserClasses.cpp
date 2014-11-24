@@ -15,20 +15,14 @@ using namespace std;
 
 namespace ensc251_advancedparserclass
 {
-	// **** Identify ****
-
-	// Default Constructor
-	Identify::Identify() : endQuote(false)
-	{
-
-	}
+	// **** Clippy ****
 
 	//Input: a list of tokens
 	//Output: head pointer to the list of assignment statements
 	//NOTE: Assignment statement must end with a semi-colon
 	//@ description: extract all the assignment statements from input token list, prepare a new token list (assignment list)
 	//using extracted statements and return the head pointer to it
-	Token* Identify::getAssignmentStatements(TokenList &tokenList)
+	Token* Clippy::getAssignmentStatements(TokenList &tokenList)
 	{
 		// Creation of Assignment statements
 		TokenList assignment_token;
@@ -69,7 +63,7 @@ namespace ensc251_advancedparserclass
 	//Input: a list of tokens
 	//Output: head pointer to the list of function declaration
 	//NOTE: Function declarations end at right parathesis
-	Token* Identify::getFunctionDeclarations(TokenList &tokenList)
+	Token* Clippy::getFunctionDeclarations(TokenList &tokenList)
 	{
 		// Creation of Function Declaration statements
 		TokenList function_declaration_token;
@@ -112,17 +106,20 @@ namespace ensc251_advancedparserclass
 		return (function_declaration_token.getFirst());
 	} // end of FunctionStatements
 
-	// **** Clippy ****
-
 	// Default constructor
-	Clippy::Clippy() : syntaxError_Found(false), logicError_Found(false)
+	Clippy::Clippy() : syntaxError_Found(false), logicError_Found(false), endQuote(true)
 	{
+		numAssignmentStatements  = 0; // Number of assignment statements
+		numFunctionDeclarations = 0; // Number of functions
+		numTokensParsed = 0; // Number of tokens parsed
 	}
 
 	// Handles the bulk of the checking process
-	void Clippy::errorAssistant()
+	void Clippy::errorAssistant(TokenList &tokenlist)
 	{
-
+		// Getting assignment statements and function declarations
+		Token *assignmentPtr = getAssignmentStatements(tokenlist);
+		Token *functionPtr = getFunctionDeclarations(tokenlist);
 
 	} // end of errorAssistant
 

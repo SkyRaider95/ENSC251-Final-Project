@@ -1,9 +1,7 @@
 /*
-
 Created by:
 Choong Jin Ng 301226977
 Steven Luu    301150253
-
 */
 
 
@@ -14,6 +12,7 @@ Steven Luu    301150253
 #include <fstream>
 
 using namespace std;
+using namespace ensc251_advancedparserclass;
 
 //Removes all inline comments from the tokenList including the // marker
 //Returns the number of comments removed
@@ -40,7 +39,6 @@ int removeInlineComments(TokenList &tokenList)
 				temp = target2->getNext();
 				tokenList.deleteToken(target1);
 				tokenList.deleteToken(target2);
-
 			}
 		}
 
@@ -151,6 +149,7 @@ int main()
 	ifstream sourceFile;
 	TokenList tokens;
 	Tokenizer tokenizer;
+	Clippy clippy;
 
 	//Read in a file line-by-line and tokenize each line
 	sourceFile.open("test.cpp");
@@ -203,6 +202,7 @@ int main()
 	}
 
 	//Test your assignment statements
+	/*
 	Token *aListPtr = getAssignmentStatements(tokens);
 
 	cout << endl;
@@ -212,5 +212,10 @@ int main()
 		cout << aListPtr->getStringRep() << " ";
 		aListPtr = aListPtr->getNext();
 	}
+	*/
+	// Error and Analysis
+	clippy.errorAssistant(tokens);
+
+
 	return 0;
 }

@@ -14,7 +14,6 @@ Jin:	I'm thinking of implementing a new header file and a new cpp to implement t
 Part 1:
 Jin:	Mostly done, TA pointed out that this does not work if (bla bla) a = 0 (resolved)
 		Listed some possibilities at the getAssignmentStatements function (resolved)
-
 Part 2:
 
 Part 3:
@@ -22,4 +21,4 @@ Part 3:
 Bonus:
 
 Misc:
-Spaces between comments produce an error. Maybe fix that?
+I am unable to get pass the parserClass. I don't know what is happening. It says that the string position is invalid (unresolved)
