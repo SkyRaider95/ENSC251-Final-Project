@@ -67,7 +67,7 @@ namespace ensc251_advancedparserclass
 		return (assignment_token.getFirst());
 	} // end of getAssignmentStatements
 
-	//Input: a list of tokens
+	/*//Input: a list of tokens
 	//Output: head pointer to the list of function declaration
 	//NOTE: Function declarations end at right parathesis
 	Token* Identify::getFunctionDeclarations(TokenList &tokenList)
@@ -104,7 +104,50 @@ namespace ensc251_advancedparserclass
 
 		// Return token list;
 		return (function_declaration_token.getFirst());
-	} // end of FunctionStatements
+	} // end of FunctionStatements*/
+	
+	Token* Identify::getFunctionDeclarations(TokenList &tokenList)
+	{
+		// Creation of Function Declaration statements
+		TokenList function_declaration_token;
+		Token *temp_token = tokenList.getFirst();
+
+		while (temp_token)
+		{
+			//Checking for left parenthesis
+			if (temp_token->getStringRep() == "(")
+			{
+				function_declaration_token.append(temp_token->getPrev());
+				//Checks for keyword after left parenthesis
+				for (int i = 0; i < numElement_tableOfKeywords; i++)
+				{
+					if (temp_token->getNext()->getStringRep() == tableOfKeywords[i])
+					{
+						//Adds tokens to the list until it finds the end of the statement;
+						while (temp_token->getStringRep() != ";")
+						{
+							function_declaration_token.append(temp_token->getStringRep());
+							temp_token = temp_token->getNext();
+
+							//When right parenthesis is found, append it to the list and the loop is over
+							if (temp_token->getStringRep() == ";")
+							{
+								function_declaration_token.append(temp_token->getStringRep());
+								numFunctionDeclarations = numFunctionDeclarations + 1;
+							}
+						}
+					}
+				}
+
+			}
+
+			// Next token 
+			temp_token = temp_token->getNext();
+		}
+
+		// Return token list;
+		return (function_declaration_token.getFirst());
+	} // end of FunctionStatements*/
 
 	// **** Clippy ****
 
