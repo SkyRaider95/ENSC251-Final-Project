@@ -13,7 +13,6 @@ Steven Luu    (301150253)
 
 using namespace std;
 
-
 namespace ensc251_advancedparserclass
 {
 	// **** Identify ****
@@ -66,8 +65,8 @@ namespace ensc251_advancedparserclass
 		// Return token list;
 		return (assignment_token.getFirst());
 	} // end of getAssignmentStatements
-
-	/*//Input: a list of tokens
+	
+	//Input: a list of tokens
 	//Output: head pointer to the list of function declaration
 	//NOTE: Function declarations end at right parathesis
 	Token* Identify::getFunctionDeclarations(TokenList &tokenList)
@@ -83,45 +82,10 @@ namespace ensc251_advancedparserclass
 			{
 				function_declaration_token.append(temp_token->getPrev());
 
-				//Adds tokens to the list until it finds the end of the statement;
-				while (temp_token->getStringRep() != ")")
-				{
-					function_declaration_token.append(temp_token->getStringRep());
-					temp_token = temp_token->getNext();
-
-					//When right parenthesis is found, append it to the list and the loop is over
-					if (temp_token->getStringRep() == ")")
-					{
-						function_declaration_token.append(temp_token->getStringRep());
-						numFunctionDeclarations = numFunctionDeclarations + 1;
-					}
-				}
-			}
-
-			// Next token 
-			temp_token = temp_token->getNext();
-		}
-
-		// Return token list;
-		return (function_declaration_token.getFirst());
-	} // end of FunctionStatements*/
-	
-	Token* Identify::getFunctionDeclarations(TokenList &tokenList)
-	{
-		// Creation of Function Declaration statements
-		TokenList function_declaration_token;
-		Token *temp_token = tokenList.getFirst();
-
-		while (temp_token)
-		{
-			//Checking for left parenthesis
-			if (temp_token->getStringRep() == "(")
-			{
-				function_declaration_token.append(temp_token->getPrev());
 				//Checks for keyword after left parenthesis
-				for (int i = 0; i < numElement_tableOfKeywords; i++)
+				for (int i = 0; i < ensc251::numElement_tableOfKeywords; i++)
 				{
-					if (temp_token->getNext()->getStringRep() == tableOfKeywords[i])
+					if (temp_token->getNext()->getStringRep() == ensc251::tableOfKeywords[i])
 					{
 						//Adds tokens to the list until it finds the end of the statement;
 						while (temp_token->getStringRep() != ";")
@@ -140,14 +104,13 @@ namespace ensc251_advancedparserclass
 				}
 
 			}
-
 			// Next token 
 			temp_token = temp_token->getNext();
 		}
 
 		// Return token list;
 		return (function_declaration_token.getFirst());
-	} // end of FunctionStatements*/
+	} // end of FunctionStatements
 
 	// **** Clippy ****
 
@@ -161,14 +124,13 @@ namespace ensc251_advancedparserclass
 	{
 
 
-		// If a function is found
-	}
+	} // end of errorAssistant
 
 	// Checks the function implementation
 	void Clippy::checkFunctionImplementation()
 	{
 
-	}
+	} // end of checkFunctionImplementation
 
 	// Input: string
 	// Output: Returns true if the conditional statement is found
@@ -183,7 +145,7 @@ namespace ensc251_advancedparserclass
 			}
 		}
 		return false;
-	}
+	} // end of checkConditionalStatement
 
 	// Input: string
 	// Output: Returns true if jump conditional statement is found. Returns false otherwise
@@ -198,7 +160,7 @@ namespace ensc251_advancedparserclass
 			}
 		}
 		return false;
-	}
+	} // end of checkJumpConditional
 
 	// Input: string
 	// Output: Returns true if the library declaration is defined correctly, returns false otherwise
@@ -218,11 +180,11 @@ namespace ensc251_advancedparserclass
 		}
 		temp_string.clear();
 		return true;
-	}
+	} // end of includeStatement
 
 	// Input: First half of punctuator (e.g ", <)
 	// Output: Returns true if found. Otherwise, returns false
-	bool checkSecondHalf(const char &first_half, const string &str)
+	bool Clippy::checkSecondHalf(const char &first_half, const string &str)
 	{
 		char second_half = NULL;
 
@@ -257,6 +219,6 @@ namespace ensc251_advancedparserclass
 		}
 
 		return false;
-	}
+	} // end of checksecondHalf
 
 } // end of namespace ensc251_advancedparserclass

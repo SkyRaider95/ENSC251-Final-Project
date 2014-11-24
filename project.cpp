@@ -54,32 +54,50 @@ int removeInlineComments(TokenList &tokenList)
 int removeBlockComments(TokenList &tokenList)
 {
 	int counter = 0;
-	bool deleted = false;
 	Token* temp, *target;
 	temp = tokenList.getFirst();
+	bool block_comment = false;
+	string temp_string;
+
 	while (temp)
 	{
-		deleted = false;
 		if (temp->getStringRep() == "/*")
 		{
 			counter++;
-			while (!deleted)
+			block_comment = true;
+
+			while (block_comment)
 			{
-				target = temp;
-				temp = temp->getNext();
-				tokenList.deleteToken(target);
-				if (temp->getStringRep() == "*/")
+				temp_string = temp->getStringRep();
+
+				// Empty string
+				if (temp_string.empty())
+				{
+					temp = temp->getNext();
+				}
+
+				// Found the end of block comment
+				else if (temp_string == "*/")
+				{
+					block_comment = false;
+					target = temp;
+					temp = temp->getNext();
+					tokenList.deleteToken(target);
+				}
+
+				// Delete comment
+				else
 				{
 					target = temp;
 					temp = temp->getNext();
-					deleted = true;
 					tokenList.deleteToken(target);
-
 				}
 			}
 		}
+
 		temp = temp->getNext();
 	}
+
 	return counter;
 }
 
