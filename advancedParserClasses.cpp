@@ -107,12 +107,12 @@ namespace ensc251_advancedparserclass
 	} // end of FunctionStatements
 
 	// Default constructor
-	Clippy::Clippy() : syntaxError_Found(false), logicError_Found(false), endQuote(true)
+	Clippy::Clippy() : syntaxError_Found(false), logicError_Found(false), functionDecError_Found(false), functionImpError_Found(false), endQuote(true)
 	{
 		numAssignmentStatements  = 0; // Number of assignment statements
 		numFunctionDeclarations = 0; // Number of functions
 		numTokensParsed = 0; // Number of tokens parsed
-	}
+	} // end of default constructor
 
 	// Handles the bulk of the checking process
 	void Clippy::errorAssistant(TokenList &tokenlist)
@@ -121,11 +121,80 @@ namespace ensc251_advancedparserclass
 		Token *assignmentPtr = getAssignmentStatements(tokenlist);
 		Token *functionPtr = getFunctionDeclarations(tokenlist);
 
+		Token *temp_token = tokenlist.getFirst();
+
+		// Parses through all the tokens to check for syntax errors
+		while (temp_token)
+		{
+			
+
+
+
+
+			temp_token = temp_token->getNext();
+		} // end of while loop
+
+		temp_token = tokenlist.getFirst();
+
+		// Parses through all the tokens to check for logical errors
+		while (temp_token)
+		{
+
+
+
+
+
+			temp_token = temp_token->getNext();
+		} // end of while loop
+
 	} // end of errorAssistant
+
+	// Checks the function declaration
+	void Clippy::checkFunctionDeclaration()
+	{
+
+	}
 
 	// Checks the function implementation
 	void Clippy::checkFunctionImplementation()
 	{
+		string functionType;
+
+		// Must return integer value
+		if (functionType == "int")
+		{
+
+		}
+
+		// Must return float value
+		else if (functionType == "float")
+		{
+
+		}
+
+		// Must return a boolean value
+		else if (functionType == "bool")
+		{
+
+		}
+
+		// Must return a string value
+		else if (functionType == "string")
+		{
+
+		}
+
+		// Return implies end of function
+		else if (functionType == "void")
+		{
+
+		}
+
+		// Error
+		else
+		{
+			functionImpError_Found = true;
+		}
 
 	} // end of checkFunctionImplementation
 

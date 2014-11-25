@@ -34,10 +34,13 @@ namespace ensc251_advancedparserclass
 		// Private Variables
 		bool syntaxError_Found; // True if a syntax error is found
 		bool logicError_Found; // True if a logic error is found
+		bool functionDecError_Found; // True if a function declaration error is found
+		bool functionImpError_Found; // True if a function implementation error is found
 		bool endQuote; // When false, it is the end of a quote or not a quote (e.g "). When true, it is inside a quote
 		int numAssignmentStatements; // Number of assignment statements
 		int numFunctionDeclarations; // Number of functions
 		int numTokensParsed; // Number of tokens parsed
+		int numSyntaxError_Found; // Number of syntax errors found
 
 		// Private Functions
 		Token* getAssignmentStatements(TokenList &tokenList);
@@ -47,6 +50,7 @@ namespace ensc251_advancedparserclass
 		Clippy();
 		void errorAssistant(TokenList &tokenList);
 
+		void checkFunctionDeclaration();
 		void checkFunctionImplementation();
 		bool checkConditionalStatement(const string &str);
 		bool checkJumpConditional(const string &str);
