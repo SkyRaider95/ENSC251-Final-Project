@@ -18,13 +18,15 @@ using namespace std;
 namespace ensc251_advancedparserclass
 {
 	// Public Constants and Arrays
+	const string assignmentOperators [] = { "=", "++", "--", "+=", "*=", "/=", "&=", "%=", "|=", "^=" };
 	const string keyWords_conditional [] = { "if", "else if", "else", "for", "while", "do", "switch" };
-	const string keyWords_jumpConditional [] = { "break", "continue" };
-	const string keyWords_function [] = {"hello"};
+	const string keyWords_jumpConditional [] = { "break", "continue"};
+	const string keyWords_Declaration [] = {"int", "float", "bool", "double", "string", "class", "struct", "union", "void"};
 
+	const int numElements_assignmentOperators = 9;
 	const int numElements_keyWords_conditional = 7;
 	const int numElements_keyWords_jumpConditional = 2;
-	const int numElements_keyWords_function = 1;
+	const int numElements_keyWords_Declaration = 9;
 
 
 	// Class Clippy identifies, checks for errors and analyzes the input code
@@ -41,6 +43,7 @@ namespace ensc251_advancedparserclass
 		int numFunctionDeclarations; // Number of functions
 		int numTokensParsed; // Number of tokens parsed
 		int numSyntaxError_Found; // Number of syntax errors found
+		int numUnknown; // Number of unknown types
 
 		// Private Functions
 		Token* getAssignmentStatements(TokenList &tokenList);

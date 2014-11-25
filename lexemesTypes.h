@@ -24,11 +24,11 @@ namespace ensc251
 	//tables
 	const string tableOfOperators [] = { "+", "-", "/", "*", "=", "<", ">", "++", "--", "<<", ">>", "!=", "&", "&&", "|", "||", "[", "]", "==" };
 	const char tableOfPunctuators [] = { ';', ',', '.', '(', ')', '{', '}' };
-	const string tableOfKeywords [] = { "auto", "bool", "break", "case", "char", "const", "continue", "default", "do", "double", "else",
+	const string tableOfKeywords [] = { "auto", "bool", "break", "case", "char", "class", "const", "continue", "default", "do", "double", "else",
 		"enum", "extern", "float", "for", "goto", "if", "int", "long", "register", "return", "short", "signed", "sizeof", "static",
 		"struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while", "asm", "_ss", "interrupt", "_cs", "cdecl",
 		"near", "_ds", "far", "pascal", "_es", "huge", "catch", "class", "delete", "friend", "inline", "new", "operator", "overload",
-		"private", "protected", "public", "template", "this", "throw", "try", "virtual" };
+		"private", "protected", "public", "struct", "template", "this", "throw", "try", "union", "virtual", "void" };
 	const string booleanValues [] = { "true", "false" };
 
 	// Own tables
@@ -46,7 +46,7 @@ namespace ensc251
 	
 	const int numElement_tableOfOperators = 19;
 	const int numElement_tableOfPunctuators = 7;
-	const int numElement_tableOfKeywords = 60;
+	const int numElement_tableOfKeywords = 64;
 	const int numElement_booleanValues = 2;
 
 	const int numElement_hexStuff = 1;

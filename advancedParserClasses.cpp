@@ -25,29 +25,33 @@ namespace ensc251_advancedparserclass
 	Token* Clippy::getAssignmentStatements(TokenList &tokenList)
 	{
 		// Creation of Assignment statements
-		TokenList assignment_token;
-		Token *temp_token = tokenList.getFirst();
+		TokenList assignment_token; // Tokenlist of all assignment tokens
+		Token *temp_token = tokenList.getFirst(); // Input tokens
+		string temp_string; // Temporary String
 
 		//Traversing through the list
 		while (temp_token)
 		{
-
-			//Checking for assignment operator "="
-			if (temp_token->getStringRep() == "=")
+			// Finding the assignment operator
+			for (int ii = 0; ii != numElements_assignmentOperators; ii++)
 			{
-				assignment_token.append(temp_token->getPrev());
-
-				//Adds tokens to the list until it finds the end of the statement;
-				while (temp_token->getStringRep() != ";")
+				// If an assignment operator is found, the previous token is tokenized
+				if (temp_token->getStringRep() == assignmentOperators[ii])
 				{
-					assignment_token.append(temp_token->getStringRep());
-					temp_token = temp_token->getNext();
+					assignment_token.append(temp_token->getPrev());
 
-					//When semicolon is found, append it to the list and the loop is over
-					if (temp_token->getStringRep() == ";")
+					//Adds tokens to the list until it finds the end of the statement;
+					while (temp_token->getStringRep() != ";")
 					{
 						assignment_token.append(temp_token->getStringRep());
-						numAssignmentStatements = numAssignmentStatements + 1;
+						temp_token = temp_token->getNext();
+
+						//When semicolon is found, append it to the list and the loop is over
+						if (temp_token->getStringRep() == ";")
+						{
+							assignment_token.append(temp_token->getStringRep());
+							numAssignmentStatements = numAssignmentStatements + 1;
+						}
 					}
 				}
 			}
@@ -112,6 +116,7 @@ namespace ensc251_advancedparserclass
 		numAssignmentStatements  = 0; // Number of assignment statements
 		numFunctionDeclarations = 0; // Number of functions
 		numTokensParsed = 0; // Number of tokens parsed
+		numUnknown = 0;
 	} // end of default constructor
 
 	// Handles the bulk of the checking process
@@ -122,15 +127,22 @@ namespace ensc251_advancedparserclass
 		Token *functionPtr = getFunctionDeclarations(tokenlist);
 
 		Token *temp_token = tokenlist.getFirst();
+		string temp_stringRep; // Temporary String Variable
+		char temp_stringType; // Temporary String Type
 
 		// Parses through all the tokens to check for syntax errors
 		while (temp_token)
 		{
-			
+			temp_stringRep = temp_token->getStringRep();
+			temp_stringType = temp_token->getStringType();
 
+			// Unknown
+			if (temp_stringType == 9)
+			{
+				numUnknown = numUnknown + 1;
+			}
 
-
-
+			temp_stringRep.clear();
 			temp_token = temp_token->getNext();
 		} // end of while loop
 
@@ -139,11 +151,7 @@ namespace ensc251_advancedparserclass
 		// Parses through all the tokens to check for logical errors
 		while (temp_token)
 		{
-
-
-
-
-
+			numTokensParsed = numTokensParsed + 1;
 			temp_token = temp_token->getNext();
 		} // end of while loop
 
@@ -186,6 +194,12 @@ namespace ensc251_advancedparserclass
 
 		// Return implies end of function
 		else if (functionType == "void")
+		{
+
+		}
+
+		// Classes and Constructors
+		else if (functionType == "class")
 		{
 
 		}
