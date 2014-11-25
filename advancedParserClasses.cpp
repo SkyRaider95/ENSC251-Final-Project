@@ -108,7 +108,93 @@ namespace ensc251_advancedparserclass
 
 		// Return token list;
 		return (function_declaration_token.getFirst());
-	} // end of FunctionStatements
+	} // end of getFunctionStatements
+
+	//Input: a list of tokens
+	//Output: head pointer to a collection of user-defined functions
+	//NOTE: Function declarations start with an identifier
+	Token* Clippy::getUserDefined(TokenList &tokenList)
+	{
+		TokenList userDefined; // token list of user defined functions
+		Token *temp_token = tokenList.getFirst();
+
+		while (temp_token)
+		{
+			// Goes through possible keywords declaration
+			for (int ii = 0; ii != numElements_keyWords_Declaration; ii++)
+			{
+				if (temp_token->getStringRep() == keyWords_Declaration[ii])
+				{
+					userDefined.append(temp_token->getNext());
+					temp_token = setIdentifierClass(temp_token, temp_token->getNext());
+					temp_token = temp_token->getNext();
+
+				.stringType(T_);
+				}
+			}
+
+
+
+		}
+
+		// Return token list
+		return (userDefined.getFirst());
+	} // end of getUserDefinedFunctions
+
+	//Input: a pointer to a token
+	//Output: it won't return anything, but within function, it should set the identifier class (i.e. token->stringType)
+	Token* Clippy::setIdentifierClass(Token *identifier_type, Token *identifier)
+	{
+		using namespace ensc251;
+
+		if (identifier_type && identifier)
+		{
+			if (identifier_type->stringRep() == "int")
+			{
+				identifier->stringType = T_Keyword;
+			}
+
+			else if (identifier_type->stringRep) == true)
+			{
+				token->stringType = T_Operator;
+			}
+			
+			else if (isBooleanValue(token->stringRep) == true)
+			{
+				token->stringType = T_Boolean;
+			}
+			
+			else if (isPunctuator(token->stringRep.at(i)) == true)
+			{
+				token->stringType = T_Punctuator;
+			}
+			
+			else if (isIdentifier(token->stringRep) == true)
+			{
+				token->stringType = T_Identifier;
+			}
+			
+			else if (isFloatLiteral(token->stringRep) == true)
+			{
+				token->stringType = T_FloatLiteral;
+			}
+			
+			else if (isIntegerLiteral(token->stringRep) == true
+			{
+				token->stringType = T_IntegerLiteral;
+			}
+			
+			else if (isStringLiteral(token->stringRep) == true)
+			{
+				token->stringType = T_StringLiteral;
+			}
+			
+			else
+			{
+				token->stringType = T_Unknown;
+			}
+		}
+	}
 
 	// Default constructor
 	Clippy::Clippy() : syntaxError_Found(false), logicError_Found(false), functionDecError_Found(false), functionImpError_Found(false), endQuote(true)

@@ -28,6 +28,21 @@ namespace ensc251_advancedparserclass
 	const int numElements_keyWords_jumpConditional = 2;
 	const int numElements_keyWords_Declaration = 9;
 
+	// Type of identifiers
+	enum IdentifierType
+	{
+		T_Integer,			// Integer type
+		T_Float,			// Float type
+		T_Boolean,			// Boolean Type
+		T_Double,			// Double Type
+		T_String,			// String Type
+		T_Class,			// Class Type
+		T_Structure,		// Structure Type
+		T_Union,			// Union Type
+		T_Void,				// Void Type
+		T_Unknown			//if token does not belong to above classes then place it in this category
+	};
+
 
 	// Class Clippy identifies, checks for errors and analyzes the input code
 	class Clippy
@@ -48,6 +63,8 @@ namespace ensc251_advancedparserclass
 		// Private Functions
 		Token* getAssignmentStatements(TokenList &tokenList);
 		Token* getFunctionDeclarations(TokenList &tokenList);
+		Token* getUserDefined(TokenList &tokenList);
+		Token* setIdentifierClass(Token *identifier_type, Token *identifier);
 		void LogicStatements();
 	public:
 		Clippy();
