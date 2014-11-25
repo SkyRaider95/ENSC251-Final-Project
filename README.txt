@@ -17,7 +17,7 @@ Jin:	Mostly done, TA pointed out that this does not work if (bla bla) a = 0 (res
 Part 2:
 
 Part 3:
-Jin:	For this part, I'm thinking we check through for any syntax errors first, then check for any other types of errors (Yes/No)
+Jin:	For this part, I'm thinking we check through for any syntax errors first, then check for any other types of errors (Yes)
 
 Bonus:
 
