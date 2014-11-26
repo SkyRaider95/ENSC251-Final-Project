@@ -91,7 +91,7 @@ namespace ensc251_advancedparserclass
 							function_declaration_token.append(temp_token->getStringRep());
 							temp_token = temp_token->getNext();
 
-							//When right parenthesis is found, append it to the list and the loop is over
+							//When the semicolon is found, append it to the list and the loop is over
 							if (temp_token->getStringRep() == ";")
 							{
 								function_declaration_token.append(temp_token->getStringRep());
@@ -117,6 +117,7 @@ namespace ensc251_advancedparserclass
 	{
 		TokenList userDefined; // token list of user defined functions
 		Token *temp_token = tokenList.getFirst();
+		string string_Type;
 
 		while (temp_token)
 		{
@@ -125,17 +126,18 @@ namespace ensc251_advancedparserclass
 			{
 				if (temp_token->getStringRep() == keyWords_Declaration[ii])
 				{
-					userDefined.append(temp_token->getNext());
-					temp_token = setIdentifierClass(temp_token, temp_token->getNext());
+					string_Type = temp_token->getStringRep();
 					temp_token = temp_token->getNext();
+					setIdentifierClass(temp_token, string_Type);
+					userDefined.append(temp_token);
+				}
 
-				.stringType(T_);
+				else
+				{
+					temp_token = temp_token->getNext();
 				}
 			}
-
-
-
-		}
+		} // end of while loop
 
 		// Return token list
 		return (userDefined.getFirst());
@@ -143,56 +145,13 @@ namespace ensc251_advancedparserclass
 
 	//Input: a pointer to a token
 	//Output: it won't return anything, but within function, it should set the identifier class (i.e. token->stringType)
-	Token* Clippy::setIdentifierClass(Token *identifier_type, Token *identifier)
+	void Clippy::setIdentifierClass(Token *identifier_type, string Type)
 	{
 		using namespace ensc251;
 
-		if (identifier_type && identifier)
+		if (identifier_type)
 		{
-			if (identifier_type->stringRep() == "int")
-			{
-				identifier->stringType = T_Keyword;
-			}
-
-			else if (identifier_type->stringRep) == true)
-			{
-				token->stringType = T_Operator;
-			}
-			
-			else if (isBooleanValue(token->stringRep) == true)
-			{
-				token->stringType = T_Boolean;
-			}
-			
-			else if (isPunctuator(token->stringRep.at(i)) == true)
-			{
-				token->stringType = T_Punctuator;
-			}
-			
-			else if (isIdentifier(token->stringRep) == true)
-			{
-				token->stringType = T_Identifier;
-			}
-			
-			else if (isFloatLiteral(token->stringRep) == true)
-			{
-				token->stringType = T_FloatLiteral;
-			}
-			
-			else if (isIntegerLiteral(token->stringRep) == true
-			{
-				token->stringType = T_IntegerLiteral;
-			}
-			
-			else if (isStringLiteral(token->stringRep) == true)
-			{
-				token->stringType = T_StringLiteral;
-			}
-			
-			else
-			{
-				token->stringType = T_Unknown;
-			}
+			identifier_type->setStringType(Type);
 		}
 	}
 
@@ -214,16 +173,16 @@ namespace ensc251_advancedparserclass
 
 		Token *temp_token = tokenlist.getFirst();
 		string temp_stringRep; // Temporary String Variable
-		char temp_stringType; // Temporary String Type
+		char temp_stringClass; // Temporary String Class
 
 		// Parses through all the tokens to check for syntax errors
 		while (temp_token)
 		{
 			temp_stringRep = temp_token->getStringRep();
-			temp_stringType = temp_token->getStringType();
+			temp_stringClass = temp_token->getStringClass();
 
 			// Unknown
-			if (temp_stringType == 9)
+			if (temp_stringClass == 9)
 			{
 				numUnknown = numUnknown + 1;
 			}

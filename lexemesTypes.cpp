@@ -1,13 +1,11 @@
 /*
  * lexemesTypes.cpp
- *
- * Created on: Oct 27, 2014
- *
+ *Created on: Oct 27, 2014
  */
 
 /*
-Choong Jin Ng (301226977)
-Steve Luu (301150253)
+Choong Jin Ng	(301226977)
+Steve Luu		(301150253)
 */
 
 #include "lexemesTypes.h"
@@ -225,9 +223,9 @@ namespace ensc251
 		}
 	  return false;
 	  } // End of isFloatLiteral
-
-	  //This function returns TRUE if the input is string literal else FALSE
-	  bool isStringLiteral(const string &lexeme)
+	
+	//This function returns TRUE if the input is string literal else FALSE
+	bool isStringLiteral(const string &lexeme)
 	  {
 	  	// Searches the entire string
 	  	int ii = 0;

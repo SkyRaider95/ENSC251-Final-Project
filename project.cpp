@@ -197,7 +197,7 @@ int main()
 
 	while (t)
 	{
-		cout << t->getStringType() << " ";
+		cout << t->getStringClass() << " ";
 		t = t->getNext();
 	}
 
@@ -215,7 +215,5 @@ int main()
 	*/
 	// Error and Analysis
 	clippy.errorAssistant(tokens);
-
-
 	return 0;
 }

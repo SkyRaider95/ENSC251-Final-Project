@@ -28,7 +28,8 @@ private:
 	Token *next; //Next pointer for doubly linked list
 	Token *prev; //Previous pointer for doubly linked list
 	string stringRep; //Token value
-    TokenClass stringType; //Token type (to which class this token belongs to, for e.g. identifier, keywords...etc)
+    TokenClass stringClass; //Token class (to which class this token belongs to, for e.g. identifier, keywords...etc)
+	string stringType; // Under class, what type of string is it (e.g int, bool, class, union)
 
 	//Allow TokenList class to access Token member variables marked private
 	friend class TokenList;
@@ -76,14 +77,26 @@ public:
 		this->stringRep = stringRep;
 	}
 
-	//Returns a reference to the Token's stringType member variable
-	const TokenClass getStringType ( ) const
+	//Returns a reference to the Token's stringClass member variable
+	const TokenClass getStringClass ( ) const
+	{
+		return stringClass;
+	}
+
+	//Sets the token's stringClass variable
+	void setStringClass (const TokenClass& stringClass)
+	{
+		this->stringClass = stringClass;
+	}
+
+	// Returns a reference to the Token's stringType member variable
+	const string getStringType() const
 	{
 		return stringType;
 	}
 
-	//Sets the token's stringType variable
-	void setStringType (const TokenClass& stringType )
+	// Sets the token's stringType variable
+	void setStringType(const string& stringType)
 	{
 		this->stringType = stringType;
 	}
@@ -127,13 +140,19 @@ public:
 	void deleteToken(Token *token);
 
 	//Input: a pointer to a token
-	//Output: it won't return anything, but within function, it should set the token class (i.e. token->stringType)
+	//Output: it won't return anything, but within function, it should set the token class (i.e. token->stringClass)
 	//Note: one can invoke this function before adding token to the token list
 	void setTokenClass(Token *token);
+
+	//Input: a pointer to a token
+	//Output: it won't return anything, but within function, it should set the token class (i.e. token->stringClass)
+	//NOTE: DOES NOT DO ANYTHING RIGHT NOW
+	void setTokenType(Token *token);
 };
 
 //A class for tokenizing a string of C++  code into tokens
-class Tokenizer {
+class Tokenizer 
+{
 private:
 	/*State tracking variables for processing a single string*/
 	bool processingInlineComment; //True if processing an In-line comment //

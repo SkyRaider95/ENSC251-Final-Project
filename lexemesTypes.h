@@ -24,35 +24,33 @@ namespace ensc251
 	//tables
 	const string tableOfOperators [] = { "+", "-", "/", "*", "=", "<", ">", "++", "--", "<<", ">>", "!=", "&", "&&", "|", "||", "[", "]", "==" };
 	const char tableOfPunctuators [] = { ';', ',', '.', '(', ')', '{', '}' };
-	const string tableOfKeywords [] = { "auto", "bool", "break", "case", "char", "class", "const", "continue", "default", "do", "double", "else",
+	const string tableOfKeywords [] = { "auto", "bool", "break", "case", "char", "const", "continue", "default", "do", "double", "else",
 		"enum", "extern", "float", "for", "goto", "if", "int", "long", "register", "return", "short", "signed", "sizeof", "static",
 		"struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while", "asm", "_ss", "interrupt", "_cs", "cdecl",
 		"near", "_ds", "far", "pascal", "_es", "huge", "catch", "class", "delete", "friend", "inline", "new", "operator", "overload",
-		"private", "protected", "public", "struct", "template", "this", "throw", "try", "union", "virtual", "void" };
+		"private", "protected", "public", "template", "this", "throw", "try", "virtual" };
 	const string booleanValues [] = { "true", "false" };
 
 	// Own tables
 	const char hexStuff[] = { '0', 'x', 'X' };
 	const char stringStuff[] = { '"' };
-	//const char numberStuff [] = { '-', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
-	//Changed to include '-'. Negative numbers are still number literals which are indicated by the '-' sign
 	const char numberStuff[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
-	'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'u', 'U', 'l', 'L', '-'};
+		'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'u', 'U', 'l', 'L', '-'};
 	const char dot = '.';
-	const string identifierWords [] = { "int", "float", "double", "bool" }; // We might use these to identify that the next string after this will be an identifier
+	const string identifierWords [] = { "int", "float", "double", "bool", "class", "union", "struct", "void" }; // We might use these to identify that the next string after this will be an identifier
 	const char identifierNames[] = { '_', 'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H',
 		'i', 'I', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T',
         'u', 'U', 'v', 'V' , 'w','W', 'x', 'X', 'y', 'Y', 'z', 'Z' };
 	
 	const int numElement_tableOfOperators = 19;
 	const int numElement_tableOfPunctuators = 7;
-	const int numElement_tableOfKeywords = 64;
+	const int numElement_tableOfKeywords = 60;
 	const int numElement_booleanValues = 2;
 
-	const int numElement_hexStuff = 1;
+	const int numElement_hexStuff = 3;
 	const int numElement_stringStuff = 1;
-	const int numElement_numberStuff = 26;
-	const int numElement_identifierWords = 4;
+	const int numElement_numberStuff = 27;
+	const int numElement_identifierWords = 8;
 	const int numElement_identifierNames = 53;
 
   //custom data type:

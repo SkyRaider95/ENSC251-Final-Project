@@ -82,7 +82,7 @@ void TokenList::deleteToken(Token *token)
 }
 
 //Input: a pointer to a token
-//Output: it won't return anything, but within function, it should set the token class (i.e. token->stringType)
+//Output: it won't return anything, but within function, it should set the token class (i.e. token->stringClass)
 //Note: one can invoke this function before adding token to the token list
 void TokenList::setTokenClass(Token *token) 
 {
@@ -94,41 +94,53 @@ void TokenList::setTokenClass(Token *token)
 		{
 			if (isKeyword(token->stringRep) == true)
 			{
-				token->stringType = T_Keyword;
+				token->stringClass = T_Keyword;
 			}
 			else if (isOperator(token->stringRep) == true)
 			{
-				token->stringType = T_Operator;
+				token->stringClass= T_Operator;
 			}
 			else if (isBooleanValue(token->stringRep) == true)
 			{
-				token->stringType = T_Boolean;
+				token->stringClass = T_Boolean;
 			}
 			else if (isPunctuator(token->stringRep.at(i)) == true)
 			{
-				token->stringType = T_Punctuator;
+				token->stringClass = T_Punctuator;
 			}
 			else if (isIdentifier(token->stringRep) == true)
 			{
-				token->stringType = T_Identifier;
+				token->stringClass = T_Identifier;
 			}
 			else if (isFloatLiteral(token->stringRep) == true)
 			{
-				token->stringType = T_FloatLiteral;
+				token->stringClass = T_FloatLiteral;
 			}
 			else if (isIntegerLiteral(token->stringRep) == true)
 			{
-				token->stringType = T_IntegerLiteral;
+				token->stringClass = T_IntegerLiteral;
 			}
 			else if (isStringLiteral(token->stringRep) == true)
 			{
-				token->stringType = T_StringLiteral;
+				token->stringClass = T_StringLiteral;
 			}
 			else
 			{
-				token->stringType = T_Unknown;
+				token->stringClass = T_Unknown;
 			}
 		}
+	}
+}
+
+//Input: a pointer to a token
+//Output: it won't return anything, but within function, it should set the token type (i.e. token->setStringType(string))
+//NOTE: DOES NOT DO ANYTHING RIGHT NOW
+void setTokenType(Token *token)
+{
+	using namespace ensc251;
+
+	if (token)
+	{
 	}
 }
 
