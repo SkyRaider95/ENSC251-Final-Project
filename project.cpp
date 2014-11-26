@@ -192,6 +192,8 @@ int main()
 		t = t->getNext();
 	}
 
+	cout << endl;
+
 	t = tokens.getFirst();
 
 	while (t)
@@ -199,6 +201,7 @@ int main()
 		cout << t->getStringClass() << " ";
 		t = t->getNext();
 	}
+	cout << endl;
 
 	// Error and Analysis
 	clippy.errorAssistant(tokens);

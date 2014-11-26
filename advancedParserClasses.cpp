@@ -22,7 +22,7 @@ namespace ensc251_advancedparserclass
 	//NOTE: Assignment statement must end with a semi-colon
 	//@ description: extract all the assignment statements from input token list, prepare a new token list (assignment list)
 	//using extracted statements and return the head pointer to it
-	Token* Clippy::getAssignmentStatements(TokenList &tokenList)
+	TokenList Clippy::getAssignmentStatements(TokenList &tokenList)
 	{
 		// Creation of Assignment statements
 		TokenList assignment_token; // Tokenlist of all assignment tokens
@@ -61,13 +61,13 @@ namespace ensc251_advancedparserclass
 		}
 
 		// Return token list;
-		return (assignment_token.getFirst());
+		return (assignment_token);
 	} // end of getAssignmentStatements
 	
 	//Input: a list of tokens
 	//Output: head pointer to the list of function declaration
 	//NOTE: Function declarations end at right parathesis
-	Token* Clippy::getFunctionDeclarations(TokenList &tokenList)
+	TokenList Clippy::getFunctionDeclarations(TokenList &tokenList)
 	{
 		// Creation of Function Declaration statements
 		TokenList function_declaration_token;
@@ -107,7 +107,7 @@ namespace ensc251_advancedparserclass
 		}
 
 		// Return token list;
-		return (function_declaration_token.getFirst());
+		return (function_declaration_token);
 	} // end of getFunctionStatements
 
 	//Input: a list of tokens
@@ -168,8 +168,12 @@ namespace ensc251_advancedparserclass
 	void Clippy::errorAssistant(TokenList &tokenlist)
 	{
 		// Getting assignment statements and function declarations
-		Token *assignmentPtr = getAssignmentStatements(tokenlist);
-		Token *functionPtr = getFunctionDeclarations(tokenlist);
+		TokenList assignmentPtr = getAssignmentStatements(tokenlist);
+		TokenList functionPtr = getFunctionDeclarations(tokenlist);
+
+		printTokenList(assignmentPtr);
+		printTokenList(functionPtr);
+
 
 		Token *temp_token = tokenlist.getFirst();
 		string temp_stringRep; // Temporary String Variable

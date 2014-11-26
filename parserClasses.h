@@ -25,6 +25,7 @@ typedef ensc251::LexemeType TokenClass;
 
 //Token class for a doubly-linked list of string tokens
 class Token
+
 {
 private:
 	Token *next; //Next pointer for doubly linked list

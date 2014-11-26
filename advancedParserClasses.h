@@ -45,8 +45,31 @@ namespace ensc251_advancedparserclass
 		int numUnknown; // Number of unknown types
 
 		// Private Functions
-		Token* getAssignmentStatements(TokenList &tokenList);
-		Token* getFunctionDeclarations(TokenList &tokenList);
+		TokenList getAssignmentStatements(TokenList &tokenList);
+		TokenList getFunctionDeclarations(TokenList &tokenList);
+
+		// Input: TokenList needed to be printed to the screen
+		// Output: Prints the TokenList to the screen. If TokenList is empty, it will say that it is empty
+		// NOTE: Does not change the TokenList itself
+		void printTokenList(TokenList printTokens)
+		{
+			Token *t = printTokens.getFirst();
+
+			// If printTokens is empty
+			if (t == NULL)
+			{
+				cout << "Nothing to print";
+			}
+
+			// As long as t is not NULL
+			while (t != NULL)
+			{
+				cout << t->getStringRep() << " ";
+				t = t->getNext();
+			}
+
+			cout << endl;
+		}
 		Token* getUserDefined(TokenList &tokenList);
 		void setIdentifierClass(Token *identifier_type, string Type);
 		void LogicStatements();
