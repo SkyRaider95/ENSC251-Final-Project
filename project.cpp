@@ -111,25 +111,26 @@ Token* getAssignmentStatements(TokenList &tokenList)
 
 	//Traversing through the list
 	while (temp_token)
-	{		
-		
+	{
 		//Checking for assignment operator "="
 		if (temp_token->getStringRep() == "=")
 		{
-			assignment_token.append(temp_token->getPrev());
-
-			//Adds tokens to the list until it finds the end of the statement;
-			while (temp_token->getStringRep() != ";")
+			if(temp_token->getNext()->getNext()->getStringRep() == ";")
 			{
-				assignment_token.append(temp_token->getStringRep());
-				temp_token = temp_token->getNext();
-
-				//When semicolon is found, append it to the list and the loop is over
-				if (temp_token->getStringRep() == ";")
+				assignment_token.append(temp_token->getPrev());
+				//Adds tokens to the list until it finds the end of the statement;
+				while (temp_token->getStringRep() != ";")
 				{
 					assignment_token.append(temp_token->getStringRep());
+					temp_token = temp_token->getNext();
+
+					//When semicolon is found, append it to the list and the loop is over
+					if (temp_token->getStringRep() == ";")
+					{
+						assignment_token.append(temp_token->getStringRep());
+					}
 				}
-			}
+			}	
 		}
 		
 		// Next token 
