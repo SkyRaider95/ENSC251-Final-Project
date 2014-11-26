@@ -22,4 +22,5 @@ Jin:	For this part, I'm thinking we check through for any syntax errors first, t
 Bonus:
 
 Misc:
-I am unable to get pass the parserClass. I don't know what is happening. It says that the string position is invalid (unresolved)
+I found the bug. It happens when test.cpp has "int a = 0". However, when I tried "int a = 1", it works. (unresolved)
+Also, if there is empty space, the program will fail.

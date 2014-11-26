@@ -175,7 +175,7 @@ namespace ensc251_advancedparserclass
 		string temp_stringRep; // Temporary String Variable
 		char temp_stringClass; // Temporary String Class
 
-		// Parses through all the tokens to check for syntax errors
+		// Parses through all the tokens to analyze and check for errors
 		while (temp_token)
 		{
 			temp_stringRep = temp_token->getStringRep();

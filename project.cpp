@@ -200,19 +200,6 @@ int main()
 		t = t->getNext();
 	}
 
-	//Test your assignment statements
-	/*
-	Token *aListPtr = getAssignmentStatements(tokens);
-
-	cout << endl;
-
-	while (aListPtr)
-	{
-		cout << aListPtr->getStringRep() << " ";
-		aListPtr = aListPtr->getNext();
-	}
-	*/
-
 	// Error and Analysis
 	clippy.errorAssistant(tokens);
 	return 0;
