@@ -82,7 +82,7 @@ namespace ensc251_advancedparserclass
 		bool checkConditionalStatement(const string &str);
 		bool checkJumpConditional(const string &str);
 		bool includeStatement(const string &str);
-		bool checkSecondHalf(const char &first_half, const string &str);
+		int checkSecondHalf(TokenList &tokenList, int previous_error);
 	}; // end of Class Clippy
 
 } // end of namespace ensc251_advancedparserclass

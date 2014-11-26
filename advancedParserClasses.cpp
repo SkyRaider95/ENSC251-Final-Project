@@ -174,35 +174,30 @@ namespace ensc251_advancedparserclass
 		printTokenList(assignmentPtr);
 		printTokenList(functionPtr);
 
-
 		Token *temp_token = tokenlist.getFirst();
-		string temp_stringRep; // Temporary String Variable
-		char temp_stringClass; // Temporary String Class
+		string temp_stringRep;	// Temporary String Variable
+		char temp_stringClass;	// Temporary String Class
+		string temp_stringType;	// Temporary String Type
 
 		// Parses through all the tokens to analyze and check for errors
 		while (temp_token)
 		{
 			temp_stringRep = temp_token->getStringRep();
 			temp_stringClass = temp_token->getStringClass();
+			temp_stringType = temp_token->getStringType();
 
 			// Unknown
 			if (temp_stringClass == 9)
 			{
 				numUnknown = numUnknown + 1;
 			}
-
 			temp_stringRep.clear();
+
+			numTokensParsed = numTokensParsed + 1;
 			temp_token = temp_token->getNext();
 		} // end of while loop
 
 		temp_token = tokenlist.getFirst();
-
-		// Parses through all the tokens to check for logical errors
-		while (temp_token)
-		{
-			numTokensParsed = numTokensParsed + 1;
-			temp_token = temp_token->getNext();
-		} // end of while loop
 
 	} // end of errorAssistant
 
@@ -311,43 +306,42 @@ namespace ensc251_advancedparserclass
 		return true;
 	} // end of includeStatement
 
-	// Input: First half of punctuator (e.g ", <)
-	// Output: Returns true if found. Otherwise, returns false
-	bool Clippy::checkSecondHalf(const char &first_half, const string &str)
+	// Input: Tokenlist to search for punctuators
+	// Output: Returns the number of errors, if any.
+	// NOTE: This is a recursive function
+	int Clippy::checkSecondHalf(TokenList &tokenList, int previous_error)
 	{
-		char second_half = NULL;
+		// Declaration of Variables
+		char left_parenthesis = '(';
+		char right_parethesis = ')';
+		char left_bracket = '[';
+		char right_bracket = ']';
+		int number_of_errors = previous_error;
+		TokenList temp_tokenList = tokenList;
+		Token *temp_token = tokenList.getFirst();
 
-		if (first_half == '<')
+		if (temp_token->getStringRep() == "(")
 		{
-			second_half = '>';
+			number_of_errors = number_of_errors + 1;
 		}
 
-		else if (first_half == '"')
+		if (temp_token->getStringRep() == ")")
 		{
-			second_half = first_half;
+			number_of_errors = number_of_errors - 1;
 		}
 
-		else if (first_half == '\'')
+		if (temp_token->getStringRep() == "<")
 		{
-			second_half = '\'';
+			number_of_errors = number_of_errors - 1;
 		}
 
-		// Invalid
-		if (second_half == NULL)
+		if (temp_token->getStringRep() == ">")
 		{
-			cerr << "ERROR! Invalid first_half" << endl;
-			return false;
+			number_of_errors = number_of_errors - 1;
 		}
 
-		for (int ii = 0; ii != str.length(); ii++)
-		{
-			if (second_half == str[ii])
-			{
-				return true;
-			}
-		}
-
-		return false;
+		return (number_of_errors);
+		
 	} // end of checksecondHalf
 
 } // end of namespace ensc251_advancedparserclass
