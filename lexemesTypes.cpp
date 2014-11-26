@@ -1,7 +1,8 @@
 /*
  * lexemesTypes.cpp
  *Created on: Oct 27, 2014
- */
+// Last Edited: 25 November 2014 - 9.34pm
+*/
 
 /*
 Choong Jin Ng	(301226977)
@@ -21,28 +22,39 @@ namespace ensc251
 		//Checks the first character of string is a valid identifier name
 		for (int i = 0; i != numElement_identifierNames; i++)
 		{
+			// Matches identifier letters
 			if (lexeme.at(ii) == identifierNames[i])
 			{
 				ii++;
+
 				//Checks the rest of the string for valid identifier characters
 				for (int jj = ii; jj != lexeme.length(); jj++)
 				{
 					//Compares char to valid identifier names
 					for (int j = 0; j != numElement_identifierNames; j++)
 					{
+						// Matches identifier letters
 						if (lexeme.at(jj) == identifierNames[j])
 						{
 							ii++;
 						}
-						if (lexeme.at(jj) == numberStuff[j])
+
+						// Matches to a number
+						else if (lexeme.at(jj) == numberStuff[j])
 						{
 							ii++;
 						}
 					}
 
-					if (ii >= lexeme.length())
+
+					if (ii == lexeme.length())
 					{
 						return true;
+					}
+
+					else
+					{
+						return false;
 					}
 
 				}
@@ -51,6 +63,11 @@ namespace ensc251
 				if (ii == lexeme.length())
 				{
 					return true;
+				}
+
+				else
+				{
+					return false;
 				}
 			}
 		}
@@ -142,14 +159,12 @@ namespace ensc251
 	{
 	  int ii = 0;
 
-	  //Checks for hex literal then moves onto next char in string
-	  //Need to fix 
-	  //Searches for 0,x,X
-	  for (int i = 0; i != 3; i++)
+	  //Checks for hex literal then moves onto next char in string by Searching for 0,x,X
+	  for (int i = 0; i != numElement_hexStuff; i++)
 	  {
 		  if (lexeme.at(ii) == hexStuff[i])
 		  {
-			  for (int h = 0; h != 3; h++)
+			  for (int h = 0; h != numElement_hexStuff; h++)
 			  {
 				  if (lexeme.at(ii) == hexStuff[h])
 				  {
@@ -190,6 +205,7 @@ namespace ensc251
 	  return false;
 	} // end of isIntegerLiteral
 
+	// This function returns true if the input is a float literal else FALSE
 	bool isFloatLiteral(const string &lexeme)
 	{
 		for (int ii = 0; ii != lexeme.length(); ii++)
@@ -198,6 +214,7 @@ namespace ensc251
 			if (lexeme.at(ii) == dot)
 			{
 				ii++;
+
 				//Checks for numbers after the dot
 				for (int jj = ii; jj != lexeme.length(); jj++)
 				{

@@ -10,6 +10,8 @@ Choong Jin Ng 301226977
 Steven Luu    301150253
 */
 
+// Last edited: 25 Nov 2014, 9.34pm
+
 //Use only the following libraries:
 #include <string>
 #include "lexemesTypes.h"
@@ -183,8 +185,7 @@ private:
 				return;
 			}
 		}
-	
-	}
+	} // end of trimwhitespace
 
 	bool isnumber(const char d)
 	{
@@ -193,7 +194,7 @@ private:
 			return true;
 		}
 		return false;
-	}
+	} // end of isnumber
 
 	//Computes a new tokenLength for the next token
 	//Modifies: size_t tokenLength, and bool complete

@@ -12,7 +12,7 @@ Choong Jin Ng 301226977
 Steven Luu    301150253
 */
 
-//Complete the implementation of the following member functions:
+// Last edited: 25 Nov 2014, 9.34pm
 
 //****TokenList class function definitions******
 
@@ -21,13 +21,19 @@ Steven Luu    301150253
 //On return from the function, it will be the last token in the list
 void TokenList::append(const string &str)
 {
-	if (str.length() == 0)
+	// If the string is empty
+	if (str.empty())
 	{
 		return;
 	}
-	Token *d = new Token(str);
-	setTokenClass(d);
-	this->append(d);
+
+	// Otherwise
+	else
+	{
+		Token *d = new Token(str);
+		setTokenClass(d);
+		this->append(d);
+	}
 }
 
 //Appends the token to the TokenList if not null
@@ -161,7 +167,6 @@ void Tokenizer::prepareNextToken()
 		trimwhitespace();
 	}
 
-
 	//if the character is the end of the line
 	if (offset == len)
 	{
@@ -180,7 +185,7 @@ void Tokenizer::prepareNextToken()
 	{
 		processingFloat = true;
 	}
-
+	
 	else if (str->at(offset) == '.')
 	{
 		if (!(offset + 1 == len)) {
@@ -190,7 +195,8 @@ void Tokenizer::prepareNextToken()
 			}
 		}
 	}
-	//boolean true processing
+
+	// Found an inline comment
 	if (processingInlineComment)
 	{
 		while (offset < len)
@@ -204,10 +210,12 @@ void Tokenizer::prepareNextToken()
 				break;
 			}
 		}
+
 		return;
 	}
 
-	else if (processingBlockComment) //this is really convoluted and stupid. can be refactored
+	// Found a block comment
+	else if (processingBlockComment)
 	{ 
 		if (offset == len)
 		{
@@ -344,24 +352,33 @@ void Tokenizer::prepareNextToken()
 		processingFloat = false;
 		return;
 	}
-	else if (processingIncludeStatement) { //this is convoluted, could probably be refactored
-		//if include statement, if we don't see a <, ", ', we have to trim whitespace until we see a
-		//<,",', or get the entire word "include" or "ifndef" as a token.
-		if (str->at(offset) != '<' && str->at(offset) != '"') {
-			while (str->at(offset) != ' ' && str->at(offset) != '\t' && str->at(offset) != '<' && str->at(offset) != '"') {
-				//gets the word "include"
+
+	//this is convoluted, could probably be refactored
+	//if include statement, if we don't see a <, ", ', we have to trim whitespace until we see a
+	//<,",', or get the entire word "include" or "ifndef" as a token.
+	else if (processingIncludeStatement)
+	{
+		if (str->at(offset) != '<' && str->at(offset) != '"')
+		{
+			//gets the word "include"
+			while (str->at(offset) != ' ' && str->at(offset) != '\t' && str->at(offset) != '<' && str->at(offset) != '"')
+			{
 				offset++;
 				tokenLength++;
-				if (offset == len) {
+				if (offset == len)
+				{
 					complete = true;
 					return;
 				}
 			}
 		}
-		else {
+
+		else
+		{
 			offset++;
 			tokenLength++;
-			while (str->at(offset) != '>' && str->at(offset) != '"') {
+			while (str->at(offset) != '>' && str->at(offset) != '"')
+			{
 				offset++; //gets <ctime> or "parserClasses.h" or whatever.
 				tokenLength++;
 				if (offset == len) {
@@ -371,22 +388,31 @@ void Tokenizer::prepareNextToken()
 			}
 			offset++;
 			tokenLength++; //gets the > at the end.
-			if (offset == len) {
+
+			if (offset == len)
+			{
 				complete = true;
 			}
 		}
 		return;
 	}
+
 	//begin regular processing
-	while (str->at(offset) != ' ' && str->at(offset) != '\t' && offset<len) {
-		if (str->at(offset) == '"') { //for string literals 
+	while (str->at(offset) != ' ' && str->at(offset) != '\t' && offset<len)
+	{
+		if (str->at(offset) == '"')
+		{ //for string literals 
 			tokenLength++;
 			offset++;
-			while (str->at(offset) != '"' && offset<len) {
-				if (str->at(offset) == '\\') { //if it sees one escape sequence, add two to offset and token length.
+			while (str->at(offset) != '"' && offset<len)
+			{
+				if (str->at(offset) == '\\')
+				{ //if it sees one escape sequence, add two to offset and token length.
 					tokenLength += 2;
 					offset += 2;
-					if (offset == len) {
+
+					if (offset == len)
+					{
 						complete = true;
 						break;
 					}
@@ -394,27 +420,39 @@ void Tokenizer::prepareNextToken()
 				}
 				tokenLength++;
 				offset++; //otherwise just move forward by one.
-				if (offset == len) {
+
+				if (offset == len)
+				{
 					complete = true;
 					break;
 				}
-			}
+			} // end of while loop
+
 			offset++; //includes the last " or the '
 			tokenLength++;
-			if (offset == len) {
+			if (offset == len)
+			{
 				complete = true;
 				break;
 			}
 			break;
 		}
-		else if (str->at(offset) == '\'') { //for string literals 
+
+		//for string literals 
+		else if (str->at(offset) == '\'')
+		{ 
 			tokenLength++;
 			offset++;
-			while (str->at(offset) != '\'' && offset<len) {
-				if (str->at(offset) == '\\') { //if it sees one escape sequence, add two to offset and token length.
+			while (str->at(offset) != '\'' && offset<len)
+			{
+				//if it sees one escape sequence, add two to offset and token length.
+				if (str->at(offset) == '\\')
+				{ 
 					tokenLength += 2;
 					offset += 2;
-					if (offset == len) {
+
+					if (offset == len)
+					{
 						complete = true;
 						break;
 					}
@@ -428,6 +466,7 @@ void Tokenizer::prepareNextToken()
 					break;
 				}
 			}
+
 			offset++; //includes the last " or the '
 			tokenLength++;
 			if (offset == len)
@@ -437,64 +476,86 @@ void Tokenizer::prepareNextToken()
 			}
 			break;
 		}
+
 		//all operators which can be doubled onto themselves except for --
 		//(::, &&, ||, ++, --, <<, >>, and also the <<= and >>= operators
 		//and &=, |=, +=, -=, <=, >
 		else if (str->at(offset) == '|' || str->at(offset) == '&' || str->at(offset) == '+' || str->at(offset) == '>' ||
-			str->at(offset) == '<' || str->at(offset) == ':' || str->at(offset) == '=') {
+			str->at(offset) == '<' || str->at(offset) == ':' || str->at(offset) == '=')
+		{
 			offset++;
 			tokenLength++;
-			if (offset == len) {
+			if (offset == len)
+			{
 				complete = true;
 				break;
 			}
-			if (str->at(offset) == str->at(offset - 1) || str->at(offset) == '=') {
+
+			if (str->at(offset) == str->at(offset - 1) || str->at(offset) == '=')
+			{
 				offset++;
 				tokenLength++;
-				if (offset == len) {
+				if (offset == len)
+				{
 					complete = true;
 					break;
 				}
-				if (str->at(offset) == '=') {
+				if (str->at(offset) == '=')
+				{
 					offset++;
 					tokenLength++;
 				}
 			}
 			break;
 		}
+
 		else if (str->at(offset) == '*' || str->at(offset) == '%' || str->at(offset) == '!' || str->at(offset) == '~' ||
 			str->at(offset) == '.' || str->at(offset) == ',' || str->at(offset) == ';' || str->at(offset) == '^' ||
-			str->at(offset) == '?' || str->at(offset) == '#') {
+			str->at(offset) == '?' || str->at(offset) == '#')
+		{
 			//list of all operators/specials that come alone/compound.
-			if (str->at(offset) == '.') {
+			if (str->at(offset) == '.')
+			{
 				offset++;
 				tokenLength++;
-				if (offset == len) {
+
+				if (offset == len)
+				{
 					complete = true;
 					break;
 				}
-				if (str->at(offset) == '*') {
+
+				if (str->at(offset) == '*')
+				{
 					offset++;
 					tokenLength++;
 				}
 			}
-			else {
+			else
+			{
 				offset++;
 				tokenLength++;
-				if (offset == len) { //in case for some reason one of these characters is the end of a line
+				if (offset == len)
+				{ //in case for some reason one of these characters is the end of a line
 					complete = true;
 					break;
 				}
-				if (str->at(offset) == '=' || str->at(offset) == ':') {
+
+				if (str->at(offset) == '=' || str->at(offset) == ':')
+				{
 					//this contains all possible 2nd parts of any compound operators (can't put spaces between)
 					//this assumes that syntax of the original file is actually correct (no one wrote something stupid like +&)
 					offset++;
 					tokenLength++;
-					if (offset == len) { //in case for some reason one of these characters is the end of a line
+
+					if (offset == len)
+					{ //in case for some reason one of these characters is the end of a line
 						complete = true;
 						break;
 					}
-					if (str->at(offset) == '=') {
+
+					if (str->at(offset) == '=')
+					{
 						//the only 3-
 						offset++;
 						tokenLength++;
@@ -503,24 +564,32 @@ void Tokenizer::prepareNextToken()
 			}
 			break;
 		}
-		else if (str->at(offset) == '-') {
+
+		else if (str->at(offset) == '-')
+		{
 			offset++;
 			tokenLength++;
 			if (offset == len) {
 				complete = true;
 				break;
 			}
-			if (str->at(offset) == '-' || str->at(offset) == '=') {
+			if (str->at(offset) == '-' || str->at(offset) == '=')
+			{
 				offset++;
 				tokenLength++;
 			}
-			else if (str->at(offset) == '>') {
+
+			else if (str->at(offset) == '>')
+			{
 				offset++;
 				tokenLength++;
-				if (offset == len) {
+
+				if (offset == len)
+				{
 					complete = true;
 					break;
 				}
+
 				if (str->at(offset) == '*')
 				{
 					offset++;
@@ -530,8 +599,10 @@ void Tokenizer::prepareNextToken()
 			}
 			break;
 		}
+		
+		// slash is special
 		else if (str->at(offset) == '/')
-		{ // slash is special
+		{
 			offset++;
 			tokenLength++;
 			if (offset == len)//in case for some reason one of these characters is the end of a line
@@ -539,6 +610,7 @@ void Tokenizer::prepareNextToken()
 				complete = true;
 				break;
 			}
+
 			if (str->at(offset) == '/' || str->at(offset) == '*' || str->at(offset) == '=')
 			{
 				offset++;
@@ -552,7 +624,8 @@ void Tokenizer::prepareNextToken()
 		{
 			offset++;
 			tokenLength++;
-			if (offset == len) {
+			if (offset == len)
+			{
 				complete = true;
 				break;
 			}
@@ -573,7 +646,8 @@ void Tokenizer::prepareNextToken()
 				//no special characters found, just take more characters.
 				offset++;
 				tokenLength++;
-				if (offset == len) {
+				if (offset == len)
+				{
 					complete = true;
 					break;
 				}
@@ -638,7 +712,6 @@ string Tokenizer::getNextToken()
 	}
 	return d;
 }
-
 
 
 

@@ -1,14 +1,14 @@
 /*
  * lexemesTypes.h
- *
  * Created on: Oct 27, 2014
- *
  */
 
 /*
 Choong Jin Ng (301226977)
 Steven Luu    (301150253)
 */
+
+// Last edited: 25 Nov 2014, 9.34pm
 
 #ifndef LEXEMESTYPES_H_
 #define LEXEMESTYPES_H_
@@ -21,26 +21,26 @@ using namespace std;
 
 namespace ensc251
 {
-	//tables
-	const string tableOfOperators [] = { "+", "-", "/", "*", "=", "<", ">", "++", "--", "<<", ">>", "!=", "&", "&&", "|", "||", "[", "]", "==" };
-	const char tableOfPunctuators [] = { ';', ',', '.', '(', ')', '{', '}' };
+	// Public Variables and tables
+
+	const string tableOfOperators [] = { "+", "-", "/", "*", "=", "<", ">", "++", "--", "<<", ">>", "!=", "&", "&&", "|", "||", "[", "]", "==" }; // Operators
+	const char tableOfPunctuators [] = { ';', ',', '.', '(', ')', '{', '}' }; // Punctuators
 	const string tableOfKeywords [] = { "auto", "bool", "break", "case", "char", "const", "continue", "default", "do", "double", "else",
 		"enum", "extern", "float", "for", "goto", "if", "int", "long", "register", "return", "short", "signed", "sizeof", "static",
 		"struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while", "asm", "_ss", "interrupt", "_cs", "cdecl",
 		"near", "_ds", "far", "pascal", "_es", "huge", "catch", "class", "delete", "friend", "inline", "new", "operator", "overload",
-		"private", "protected", "public", "template", "this", "throw", "try", "virtual" };
-	const string booleanValues [] = { "true", "false" };
+		"private", "protected", "public", "template", "this", "throw", "try", "virtual"};
+	const string booleanValues [] = { "true", "false" }; // true or false values
 
-	// Own tables
-	const char hexStuff[] = { '0', 'x', 'X' };
-	const char stringStuff[] = { '"' };
+	const char hexStuff[] = { '0', 'x', 'X' }; // hex Stuff
+	const char stringStuff[] = { '"' }; // Quotation marks
 	const char numberStuff[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
-		'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'u', 'U', 'l', 'L', '-'};
-	const char dot = '.';
+		'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'u', 'U', 'l', 'L', '-'}; // Numbers including hexadecimals
+	const char dot = '.'; // Dot. Nuff said
 	const string identifierWords [] = { "int", "float", "double", "bool", "class", "union", "struct", "void" }; // We might use these to identify that the next string after this will be an identifier
 	const char identifierNames[] = { '_', 'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H',
 		'i', 'I', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T',
-        'u', 'U', 'v', 'V' , 'w','W', 'x', 'X', 'y', 'Y', 'z', 'Z' };
+        'u', 'U', 'v', 'V' , 'w','W', 'x', 'X', 'y', 'Y', 'z', 'Z' }; // Letters
 	
 	const int numElement_tableOfOperators = 19;
 	const int numElement_tableOfPunctuators = 7;

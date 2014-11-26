@@ -4,8 +4,7 @@ Choong Jin Ng 301226977
 Steven Luu    301150253
 */
 
-
-//Use only the following three libraries:
+//Using the following libraries:
 #include "parserClasses.h"
 #include "advancedParserClasses.h"
 #include <iostream>
@@ -213,6 +212,7 @@ int main()
 		aListPtr = aListPtr->getNext();
 	}
 	*/
+
 	// Error and Analysis
 	clippy.errorAssistant(tokens);
 	return 0;
