@@ -115,20 +115,22 @@ Token* getAssignmentStatements(TokenList &tokenList)
 		//Checking for assignment operator "="
 		if (temp_token->getStringRep() == "=")
 		{
-			assignment_token.append(temp_token->getPrev());
-			//Adds tokens to the list until it finds the end of the statement;
-			while (temp_token->getStringRep() != ";")
+			if(temp_token->getNext()->getNext()->getStringRep() == ";")
 			{
-				assignment_token.append(temp_token->getStringRep());
-				temp_token = temp_token->getNext();
-
-				//When semicolon is found, append it to the list and the loop is over
-				if (temp_token->getStringRep() == ";")
+				assignment_token.append(temp_token->getPrev());
+				//Adds tokens to the list until it finds the end of the statement;
+				while (temp_token->getStringRep() != ";")
 				{
 					assignment_token.append(temp_token->getStringRep());
+					temp_token = temp_token->getNext();
+
+					//When semicolon is found, append it to the list and the loop is over
+					if (temp_token->getStringRep() == ";")
+					{
+						assignment_token.append(temp_token->getStringRep());
+					}
 				}
-			}
-			
+			}	
 		}
 		
 		// Next token 
@@ -139,6 +141,48 @@ Token* getAssignmentStatements(TokenList &tokenList)
 	// Return token list;
 	return (assignment_token.getFirst());
 } // end of getAssignmentStatements
+
+//Checks for number of right parenthesis and left parenthesis and see if they match
+//else output error message and exits
+void checkUnmatchedBrace(TokenList &tokenList)
+{
+	TokenList brace_token;
+	Token *temp_token = tokenList.getFirst();
+	//Counter for each brace
+	int right_braces = 0;
+	int left_braces = 0;
+	//Searches list for braces
+	while (temp_token->getNext()!=NULL)
+	{
+		if (temp_token->getStringRep() == "(")
+		{
+			left_braces=left_braces++;
+		}
+		if (temp_token->getStringRep() == ")")
+		{
+			right_braces=right_braces++;
+		}
+		temp_token = temp_token->getNext();
+		//End of the list
+		if (temp_token->getNext() == NULL)
+		{
+			//Number of braces matches
+			if (left_braces == right_braces)
+			{
+				return;
+			}
+			//Number of braces don't match, output error message
+			else
+			{
+				cout << "Error: Unmatched braces" << endl;
+				cout << "Press enter to exit";
+				getchar();
+				exit(0);
+			}
+		}
+	}
+	return;
+}
 
 //Example Test code for interacting with your Token, TokenList, and Tokenizer classes
 //Add your own code to further test the operation of your Token, TokenList, and Tokenizer classes
