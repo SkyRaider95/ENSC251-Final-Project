@@ -122,14 +122,28 @@ void TokenList::setTokenClass(Token *token)
 			{
 				token->stringClass = T_StringLiteral;
 			}
-			else if (isFloatLiteral(token->stringRep) == true)
+
+			// Only numbers can enter this
+			else if (isDigitLiteral(token->stringRep) == true)
 			{
-				token->stringClass = T_FloatLiteral;
+				// Is it a float
+				if (isFloatLiteral(token->stringRep) == true)
+				{
+					token->stringClass = T_FloatLiteral;
+				}
+
+				// Is it a integer
+				else if (isIntegerLiteral(token->stringRep) == true)
+				{
+					token->stringClass = T_IntegerLiteral;
+				}
+
+				else
+				{
+					token->stringClass = T_Unknown;
+				}
 			}
-			else if (isIntegerLiteral(token->stringRep) == true)
-			{
-				token->stringClass = T_IntegerLiteral;
-			}
+
 			else
 			{
 				token->stringClass = T_Unknown;
