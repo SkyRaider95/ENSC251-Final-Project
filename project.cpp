@@ -107,35 +107,40 @@ int removeBlockComments(TokenList &tokenList)
 Token* getAssignmentStatements(TokenList &tokenList)
 {
 	// Creation of Assignment statements
-	TokenList assignment_token;
-	Token *temp_token = tokenList.getFirst();
+	TokenList assignment_token; // Tokenlist of all assignment tokens
+	Token *temp_token = tokenList.getFirst(); // Input tokens
+	string temp_string; // Temporary String
 
 	//Traversing through the list
 	while (temp_token)
 	{
-		//Checking for assignment operator "="
-		if (temp_token->getStringRep() == "=")
+		// Finding the assignment operator
+		for (int ii = 0; ii != numElements_assignmentOperators; ii++)
 		{
-			assignment_token.append(temp_token->getPrev());
-			//Adds tokens to the list until it finds the end of the statement;
-			while (temp_token->getStringRep() != ";")
+			// If an assignment operator is found, the previous token is tokenized
+			if (temp_token->getStringRep() == assignmentOperators[ii])
 			{
-				assignment_token.append(temp_token->getStringRep());
-				temp_token = temp_token->getNext();
+				assignment_token.append(temp_token->getPrev());
 
-				//When semicolon is found, append it to the list and the loop is over
-				if (temp_token->getStringRep() == ";")
+				//Adds tokens to the list until it finds the end of the statement;
+				while (temp_token->getStringRep() != ";")
 				{
 					assignment_token.append(temp_token->getStringRep());
-				}
+					temp_token = temp_token->getNext();
+
+					//When semicolon is found, append it to the list and the loop is over
+					if (temp_token->getStringRep() == ";")
+					{
+						assignment_token.append(temp_token->getStringRep());
+						// numAssignmentStatements = numAssignmentStatements + 1;
+					}
+				} // end of while loop
 			}
-			
 		}
-		
+
 		// Next token 
 		temp_token = temp_token->getNext();
-
-	}
+	} // end of while loop
 
 	// Return token list;
 	return (assignment_token.getFirst());
@@ -609,7 +614,6 @@ void print_verbose(TokenList &tokenList)
 	// tokenList = clippy.getFunctionDeclarations(tokenList);
 	// printTokensClass_V(tokenList);
 } // end of print_verbose
-
 
 //Example Test code for interacting with your Token, TokenList, and Tokenizer classes
 //Add your own code to further test the operation of your Token, TokenList, and Tokenizer classes
