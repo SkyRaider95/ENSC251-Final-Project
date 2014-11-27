@@ -1,7 +1,7 @@
 APPS = Final Project
 
 #Change to your own student number
-STUDENT_NUMBER = 301150253
+STUDENT_NUMBER = 301226977
 
 OBJECTS = lexemesTypes.o parserClasses.o project.o
 HEADERS = lexemesTypes.h parserClasses.h

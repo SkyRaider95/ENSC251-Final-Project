@@ -254,6 +254,12 @@ class Clippy
 	friend class TokenList;
 	friend class Token;
 private:
+	// Private Variables
+
+	TokenList function_implementation_token;
+	TokenList function_declaration_token;
+
+
 	//Input: a list of tokens
 	//Output: head pointer to the list of assignment statements
 	//NOTE: Assignment statement must end with a semi-colon
@@ -296,9 +302,10 @@ private:
 	//Looks for the number of function declaration
 	Token* getFunctionDeclarations(TokenList &tokenList)
 	{
+		using namespace ensc251;
+
 		// Creation of Function Declaration statements
 		Token *temp_token = tokenList.getFirst();
-		TokenList function_declaration_token;
 		int numFunctionDeclarations = 0;
 		while (temp_token)
 		{
@@ -308,9 +315,9 @@ private:
 				//function_declaration_token.append(temp_token->getPrev());
 				//Checks for keyword after left parenthesis
 
-				for (int i = 0; i < ensc251::numElement_identifierWords; i++)
+				for (int i = 0; i < numElement_identifierWords; i++)
 				{
-					if (temp_token->getPrev()->getPrev()->getStringRep() == ensc251::identifierWords[i])
+					if (temp_token->getPrev()->getPrev()->getStringRep() == identifierWords[i])
 					{
 						temp_token = temp_token->getPrev();
 						//Adds tokens to the list until it finds the end of the statement;
@@ -333,8 +340,38 @@ private:
 		}
 		// Return token list;
 		cout << numFunctionDeclarations << endl;
+		checkFunctionImplementation(tokenList);
 		return (function_declaration_token.getFirst());
 	} // end of getFunctionDeclarations
+
+	// Looks for functionImplementation
+	void checkFunctionImplementation(TokenList &tokenList)
+	{
+		// Creation of Function Declaration statements
+		Token *temp_token = tokenList.getFirst();
+		int bracket = 0;
+		while (temp_token)
+		{
+			//Checking for left curly bracket
+			if (temp_token->getStringRep() == "{")
+			{
+				bracket = bracket + 1;
+			}
+			// Checking for right curly bracket
+			else if (temp_token->getStringRep() == "}")
+			{
+				bracket = bracket = 1;
+			}
+			// Next token 
+			temp_token = temp_token->getNext();
+		}
+
+		if (bracket != 0)
+		{
+			cout << "Error! Missing curly brackets" << endl;
+		}
+
+	} // end of checkFunctionImplementation
 
 	//Checks for the order of parenthesis and see if they match
 	//Checks for number of right parenthesis and left parenthesis and see if they match
