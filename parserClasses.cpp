@@ -165,8 +165,7 @@ void TokenList::setIdentifierValue(Token *token)
 		token->identifier_value = T_Unknown;
 	}
 	return;
-}//*/
-
+} // end of setIdentifierValue
 
 //Input: a pointer to a token
 //Output: it won't return anything, but within function, it should set the token type (i.e. token->setStringType(string))
@@ -178,7 +177,7 @@ void setTokenType(Token *token)
 	if (token)
 	{
 	}
-}
+} // end of setTokenType
 
 //****Tokenizer class function definitions******
 
@@ -743,5 +742,32 @@ string Tokenizer::getNextToken()
 	return d;
 }
 
+//****Clippy class function definitions******
+
+// Input: A tokenlist to be processed
+// Output: Prints to the screen all the details nonverbose
+void Clippy::print_nonverbose(TokenList &tokenList)
+{
+	cout << "\n" << "Number of assignment statements: ";
+	getAssignmentStatements(tokenList);
+	printBraceError(tokenList);
+	printTypeError(tokenList);
+	cout << "\n" << "Number of function declarations: ";
+	getFunctionDeclarations(tokenList);
+	printTokensTypes_NV(tokenList);
+} // end of print_nonverbose
+
+// Input: A tokenlist to be processed
+// Output: Prints to the screen all the details nonverbose
+void Clippy::print_verbose(TokenList &tokenList)
+{
+	cout << "\n" << "Number of assignment statements: ";
+	getAssignmentStatements(tokenList);
+	printBraceError(tokenList);
+	printTypeError(tokenList);
+	cout << "\n" << "Number of function declarations: ";
+	getFunctionDeclarations(tokenList);
+	printTokensTypes_V(tokenList);
+} // end of print_verbose
 
 
