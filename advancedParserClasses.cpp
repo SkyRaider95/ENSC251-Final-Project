@@ -312,10 +312,6 @@ namespace ensc251_advancedparserclass
 	int Clippy::checkSecondHalf(TokenList &tokenList, int previous_error)
 	{
 		// Declaration of Variables
-		char left_parenthesis = '(';
-		char right_parethesis = ')';
-		char left_bracket = '[';
-		char right_bracket = ']';
 		int number_of_errors = previous_error;
 		TokenList temp_tokenList = tokenList;
 		Token *temp_token = tokenList.getFirst();

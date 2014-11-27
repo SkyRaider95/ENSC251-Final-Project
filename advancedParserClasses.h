@@ -44,6 +44,13 @@ namespace ensc251_advancedparserclass
 		int numSyntaxError_Found; // Number of syntax errors found
 		int numUnknown; // Number of unknown types
 
+		int numLeftParenthesis; // Indicates the number of left parenthesis '('
+		int numRightParenthesis; // Indicates the number of right parenthesis ')'
+		int numLeftBracket; // Indicates the number of left brackets '['
+		int numRightBracket; // Indicates the number of right brackets ']'
+		int numLeftCurly; // Indicates the number of left curly brackets '{'
+		int numRightCurly; // Indicates the number of right curly brackets '}'
+		
 		// Private Functions
 		TokenList getAssignmentStatements(TokenList &tokenList);
 		TokenList getFunctionDeclarations(TokenList &tokenList);
