@@ -16,6 +16,13 @@ Jin:	I'm thinking of implementing a new header file and a new cpp to implement t
 Steven: It's a good idea but I wasn't sure how to properly implement the new classes in the advancedParserClasses 
 		So for simplicity of coding I added most new functions to the project.cpp though it doesn't looks as clean
 Jin:	If you are okay with it, I can put all the functions in project.cpp into advancerParserClasses.
+Steven: I sent you an email of the version of the project I intend to submit since we are low on time and the code here on github
+	doesn't appear to be finished. 
+	
+	Let me know if you think this is okay, the program works but the bugs mentioned before are still present.
+	
+	If we had more time we might've been able to resolve these issue but since almost everything in the program revolves
+	around getAssignmentStatements I would rather hand in one that works but not for all case.
 
 Part 1:
 Jin:	Mostly done, TA pointed out that this does not work if (bla bla) a = 0 (resolved)
