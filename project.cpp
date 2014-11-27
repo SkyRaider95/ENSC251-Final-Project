@@ -107,44 +107,77 @@ int removeBlockComments(TokenList &tokenList)
 Token* getAssignmentStatements(TokenList &tokenList)
 {
 	// Creation of Assignment statements
-	TokenList assignment_token; // Tokenlist of all assignment tokens
-	Token *temp_token = tokenList.getFirst(); // Input tokens
-	string temp_string; // Temporary String
-
+	Token *temp_token = tokenList.getFirst();
+	TokenList assignment_token;
+	int numAssignmentStatements = 0;
 	//Traversing through the list
 	while (temp_token)
 	{
-		// Finding the assignment operator
-		for (int ii = 0; ii != numElements_assignmentOperators; ii++)
+		//Checking for assignment operator "="
+		if (temp_token->getStringRep() == "=")
 		{
-			// If an assignment operator is found, the previous token is tokenized
-			if (temp_token->getStringRep() == assignmentOperators[ii])
+			//Adds tokens to the list until it finds the end of the statement;
+			assignment_token.append(temp_token->getPrev());
+			while (temp_token->getStringRep() != ";")
 			{
-				assignment_token.append(temp_token->getPrev());
-
-				//Adds tokens to the list until it finds the end of the statement;
-				while (temp_token->getStringRep() != ";")
+				assignment_token.append(temp_token->getStringRep());
+				temp_token = temp_token->getNext();
+				//When semicolon is found, append it to the list and the loop is over
+				if (temp_token->getStringRep() == ";")
 				{
 					assignment_token.append(temp_token->getStringRep());
-					temp_token = temp_token->getNext();
-
-					//When semicolon is found, append it to the list and the loop is over
-					if (temp_token->getStringRep() == ";")
-					{
-						assignment_token.append(temp_token->getStringRep());
-						// numAssignmentStatements = numAssignmentStatements + 1;
-					}
-				} // end of while loop
+					numAssignmentStatements = numAssignmentStatements + 1;
+				}
 			}
 		}
-
 		// Next token 
 		temp_token = temp_token->getNext();
-	} // end of while loop
-
+	}
 	// Return token list;
-	return (assignment_token.getFirst());
-} // end of getAssignmentStatements
+	cout << numAssignmentStatements << endl;
+	return assignment_token.getFirst();
+}//
+
+//Looks for the number of function declaration
+Token* getFunctionDeclarations(TokenList &tokenList)
+{
+	// Creation of Function Declaration statements
+	Token *temp_token = tokenList.getFirst();
+	TokenList function_declaration_token;
+	int numFunctionDeclarations = 0;
+	while (temp_token)
+	{
+		//Checking for left parenthesis
+		if (temp_token->getStringRep() == "(")
+		{
+			//function_declaration_token.append(temp_token->getPrev());
+			//Checks for keyword after left parenthesis
+			for (int i = 0; i < ensc251::numElement_tableOfKeywords; i++)
+			{
+				if (temp_token->getNext()->getStringRep() == ensc251::tableOfKeywords[i])
+				{
+					//Adds tokens to the list until it finds the end of the statement;
+					while (temp_token->getStringRep() != ";")
+					{
+						function_declaration_token.append(temp_token->getStringRep());
+						temp_token = temp_token->getNext();
+						//When semicolon is found, append it to the list and the loop is over
+						if (temp_token->getStringRep() == ";")
+						{
+							function_declaration_token.append(temp_token->getStringRep());
+							numFunctionDeclarations = numFunctionDeclarations + 1;
+						}
+					}
+				}
+			}
+		}
+		// Next token 
+		temp_token = temp_token->getNext();
+	}
+	// Return token list;
+	cout << numFunctionDeclarations << endl;
+	return (function_declaration_token.getFirst());
+}//*/
 
 //Checks for the order of parenthesis and see if they match
 //Checks for number of right parenthesis and left parenthesis and see if they match
@@ -181,7 +214,7 @@ Token* checkUnmatchedBrace(TokenList &tokenList)
 				//End of list, matching parenthesis not found
 				if (temp_token->getNext() == NULL)
 				{
-					cout << "\n" << "Error: Unmatched braces";
+					cout << "\n" << "Error: Unmatched braces" << endl;
 					return brace_token.getFirst();
 				}
 			}
@@ -192,11 +225,10 @@ Token* checkUnmatchedBrace(TokenList &tokenList)
 		}
 		// Next token 
 		temp_token = temp_token->getNext();
-	}//*/
-	
+	}
 	//Proceeds to check for the number of braces
 	if (temp_token == NULL)
-	{ 
+	{
 		TokenList brace_token1;
 		Token *temp_token = tokenList.getFirst();
 		while (temp_token->getNext() != NULL)
@@ -237,10 +269,66 @@ Token* checkUnmatchedBrace(TokenList &tokenList)
 		}
 	}
 	return brace_token.getFirst();;
-}//End of unmatchedBraces
+}//End of checkUnmatchedBraces
 
-//Functions for categorizing tokens of a class
-//Returns a list of a specific stringClass
+//Checks for matching types 
+//Goes through a list of tokens and looks for an identifier
+//If there is an identifier and the previous token is a keyword of a type, 
+//then apply the keyword type to the identifier
+//Compares the identifierValue of the identifier with the identifierValue of the token after the assignment operator
+//Output an error message and list of error if types don't match else return 0
+//Currently works for bool, int, float and string
+Token* checkUnmatchedTypes(TokenList &tokenList)
+{
+
+	TokenList matchedTypes_Tokens;
+	Token *temp_Token = tokenList.getFirst();
+	while (temp_Token->getStringRep() != ";")
+	{
+		for (int i = 0; i < numElement_tableOfIDtype; i++)
+		{
+			//Looks for keyword types
+			if (temp_Token->getStringRep() == tableOfIDtypes[i])
+			{
+				matchedTypes_Tokens.append(temp_Token->getStringRep());
+				//Checks if the next token is an identifier
+				if (temp_Token->getNext()->getStringClass() == T_Identifier)
+				{
+					//Assigns keyword type to identifier_value
+					temp_Token->getNext()->setID_value(temp_Token->getID_value());
+					matchedTypes_Tokens.append(temp_Token->getNext()->getStringRep());
+					//Checks for assignment operator after the identifier
+					temp_Token = temp_Token->getNext();
+					if (temp_Token->getNext()->getStringRep() == "=")
+					{
+						matchedTypes_Tokens.append(temp_Token->getNext()->getStringRep());
+						//Checks for if identifer value matches the string type of token
+						if (temp_Token->getID_value() == temp_Token->getNext()->getNext()->getStringClass())
+						{
+							temp_Token = temp_Token->getNext();
+							matchedTypes_Tokens.append(temp_Token->getNext()->getStringRep());
+							matchedTypes_Tokens.append(temp_Token->getNext()->getNext()->getStringRep());
+							return 0;
+						}
+						else
+						{
+							temp_Token = temp_Token->getNext();
+							matchedTypes_Tokens.append(temp_Token->getNext()->getStringRep());
+							matchedTypes_Tokens.append(temp_Token->getNext()->getNext()->getStringRep());
+							cout << "Error: mismatch types" << endl;
+							return matchedTypes_Tokens.getFirst();
+						}
+					}
+				}
+			}
+		}
+		temp_Token = temp_Token->getNext();
+	}
+	return 0;
+}// End of checkUnmatchedTypes function
+
+// Functions for categorizing tokens of identifiers
+// Returns a list of identifiers
 Token* categorizeIdentifiers(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -257,10 +345,10 @@ Token* categorizeIdentifiers(TokenList &tokenList)
 	}
 	cout << numOfTokens << endl;
 	return sortTokens.getFirst();
-}
+} // end of categorizeIdentifiers
 
-//Functions for categorizing tokens of a class
-//Returns a list of a specific stringClass
+// Functions for categorizing tokens of operators
+// Returns a list of operators
 Token* categorizeOperator(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -277,10 +365,10 @@ Token* categorizeOperator(TokenList &tokenList)
 	}
 	cout << numOfTokens << endl;
 	return sortTokens.getFirst();
-}
+} // end of categorizeOperators
 
-//Functions for categorizing tokens of a class
-//Returns a list of a specific stringClass
+// Function for categorizing tokens of punctuators
+// Returns a list of a specific punctuator
 Token* categorizePunctuator(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -297,10 +385,10 @@ Token* categorizePunctuator(TokenList &tokenList)
 	}
 	cout << numOfTokens << endl;
 	return sortTokens.getFirst();
-}
+} // end of Punctuator
 
-//Functions for categorizing tokens of a class
-//Returns a list of a specific stringClass
+// Function for categorizing tokens of keywords
+// Returns a list of keywords
 Token* categorizeKeyword(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -317,10 +405,10 @@ Token* categorizeKeyword(TokenList &tokenList)
 	}
 	cout << numOfTokens << endl;
 	return sortTokens.getFirst();
-}
+} // end of categorize Keyword
 
-//Functions for categorizing tokens of a class
-//Returns a list of a specific stringClass
+// Function for categorizing tokens of boolean
+// Returns a list of boolean
 Token* categorizeBoolean(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -337,10 +425,10 @@ Token* categorizeBoolean(TokenList &tokenList)
 	}
 	cout << numOfTokens << endl;
 	return sortTokens.getFirst();
-}
+} // end of categorizeBoolean
 
-//Functions for categorizing tokens of a class
-//Returns a list of a specific stringClass
+// Function for categorizing tokens of Integers
+// Returns a list of integers
 Token* categorizeInteger(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -357,10 +445,10 @@ Token* categorizeInteger(TokenList &tokenList)
 	}
 	cout << numOfTokens << endl;
 	return sortTokens.getFirst();
-}
+} // end of categorizeInteger
 
-//Functions for categorizing tokens of a class
-//Returns a list of a specific stringClass
+// Function for categorizing tokens of floats
+// Returns a list of floats
 Token* categorizeFloat(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -377,10 +465,10 @@ Token* categorizeFloat(TokenList &tokenList)
 	}
 	cout << numOfTokens << endl;
 	return sortTokens.getFirst();
-}
+} // end of categorizeFloat
 
-//Functions for categorizing tokens of a class
-//Returns a list of a specific stringClass
+// Function for categorizing tokens of strings
+// Returns a list of strings
 Token* categorizeString(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -397,10 +485,10 @@ Token* categorizeString(TokenList &tokenList)
 	}
 	cout << numOfTokens << endl;
 	return sortTokens.getFirst();
-}
+} // end of categorizeString
 
-//Functions for categorizing tokens of a class
-//Returns a list of a specific stringClass
+// Function for categorizing tokens of unknown types
+// Returns a list of unknown types
 Token* categorizeUnknown(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -417,9 +505,12 @@ Token* categorizeUnknown(TokenList &tokenList)
 	}
 	cout << numOfTokens << endl;
 	return sortTokens.getFirst();
-}
+} // end of categorizeUnknown
 
 //Functions for printing token values in tokenlists
+
+// Input: List of tokens
+// Output: Print to screen the assignment tokens
 void printAssignment(TokenList &tokenList)
 {
 	Token *aListPtr1 = getAssignmentStatements(tokenList);
@@ -428,10 +519,11 @@ void printAssignment(TokenList &tokenList)
 		cout << aListPtr1->getStringRep() << " ";
 		aListPtr1 = aListPtr1->getNext();
 	}
-}//*/
+} // end of printAssignment
 
-// Print all the errors
-void printError(TokenList &tokenList)
+// Input: List of tokens
+// Output: Print to screen the brace errors
+void printBraceError(TokenList &tokenList)
 {
 	Token *aListPtr1 = checkUnmatchedBrace(tokenList);
 	while (aListPtr1)
@@ -439,9 +531,22 @@ void printError(TokenList &tokenList)
 		cout << aListPtr1->getStringRep() << " ";
 		aListPtr1 = aListPtr1->getNext();
 	}
-} // end of printError
+} // end of printBraceError
 
-// Print identifiers
+// Input: List of tokens
+// Output: Print to screen the type error tokens
+void printTypeError(TokenList &tokenList)
+{
+	Token *aListPtr1 = checkUnmatchedTypes(tokenList);
+	while (aListPtr1)
+	{
+		cout << aListPtr1->getStringRep() << " ";
+		aListPtr1 = aListPtr1->getNext();
+	}
+} // end of printTypeError
+
+// Input: List of tokens
+// Output: Print to screen the identifier tokens
 void printIdentifiers(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizeIdentifiers(tokenList);
@@ -452,7 +557,8 @@ void printIdentifiers(TokenList &tokenList)
 	}
 } // end of printIdentifiers
 
-// Print Operators
+// Input: List of tokens
+// Output: Print to screen the operator tokens
 void printOperators(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizeOperator(tokenList);
@@ -463,7 +569,8 @@ void printOperators(TokenList &tokenList)
 	}
 }
 
-// Print
+// Input: List of tokens
+// Output: Print to screen the punctuator tokens
 void printPunctuators(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizePunctuator(tokenList);
@@ -472,9 +579,10 @@ void printPunctuators(TokenList &tokenList)
 		cout << aListPtr1->getStringRep() << " ";
 		aListPtr1 = aListPtr1->getNext();
 	}
-}
+} // end of printPunctuators
 
-// Print
+// Input: List of tokens
+// Output: Print to screen the keyword tokens
 void printKeywords(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizeKeyword(tokenList);
@@ -483,9 +591,10 @@ void printKeywords(TokenList &tokenList)
 		cout << aListPtr1->getStringRep() << " ";
 		aListPtr1 = aListPtr1->getNext();
 	}
-}
+} // end of printKeywords
 
-// Print
+// Input: List of tokens
+// Output: Print to screen the boolean tokens
 void printBoolean(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizeBoolean(tokenList);
@@ -494,9 +603,10 @@ void printBoolean(TokenList &tokenList)
 		cout << aListPtr1->getStringRep() << " ";
 		aListPtr1 = aListPtr1->getNext();
 	}
-}
+} // end of printBoolean
 
-// Print
+// Input: List of tokens
+// Output: Print to screen the integer tokens
 void printIntegers(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizeInteger(tokenList);
@@ -505,9 +615,10 @@ void printIntegers(TokenList &tokenList)
 		cout << aListPtr1->getStringRep() << " ";
 		aListPtr1 = aListPtr1->getNext();
 	}
-}
+} // end of printIntegers
 
-// Print
+// Input: List of tokens
+// Output: Print to screen the float tokens
 void printFloats(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizeFloat(tokenList);
@@ -516,9 +627,10 @@ void printFloats(TokenList &tokenList)
 		cout << aListPtr1->getStringRep() << " ";
 		aListPtr1 = aListPtr1->getNext();
 	}
-}
+} // end of printFloats
 
-// Print
+// Input: List of tokens
+// Output: Print to screen the string tokens
 void printStrings(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizeString(tokenList);
@@ -527,9 +639,10 @@ void printStrings(TokenList &tokenList)
 		cout << aListPtr1->getStringRep() << " ";
 		aListPtr1 = aListPtr1->getNext();
 	}
-}
+} // end of printStrings
 
-// Print
+// Input: List of tokens
+// Output: Print to screen the unknown tokens
 void printUnknowns(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizeUnknown(tokenList);
@@ -538,11 +651,11 @@ void printUnknowns(TokenList &tokenList)
 		cout << aListPtr1->getStringRep() << " ";
 		aListPtr1 = aListPtr1->getNext();
 	}
-}
+} // end of printUnknowns
 
 // Prints tokens types in non verbose mode
 // Gives the total number of tokens in a token type 
-void printTokensClass_NV(TokenList &tokenList)
+void printTokensTypes_NV(TokenList &tokenList)
 {
 	cout << "\n" << "Number of identifiers: ";
 	categorizeIdentifiers(tokenList);
@@ -562,11 +675,11 @@ void printTokensClass_NV(TokenList &tokenList)
 	categorizeString(tokenList);
 	cout << "Number of unknowns; ";
 	categorizeUnknown(tokenList);
-} // end of printTokensTypes_NV
+} // end of printTokensType_NV
 
-//Prints tokens types in verbose mode
-//Gives the total number of tokens in a token type  and prints tokens that belong to this category
-void printTokensClass_V(TokenList &tokenList)
+// Prints tokens types in verbose mode
+// Gives the total number of tokens in a token type  and prints tokens that belong to this category
+void printTokensTypes_V(TokenList &tokenList)
 {
 	cout << "\n" << "Number of identifiers: ";
 	printIdentifiers(tokenList);
@@ -587,44 +700,46 @@ void printTokensClass_V(TokenList &tokenList)
 	cout << "\n" << "Number of unknowns; ";
 	printUnknowns(tokenList);
 	cout << "\n";
-} // end of printTokenTypes_V
+} // end of printTokensType_V
 
-//Functions that print out the statistics of the input file
-//Gives different data depending on non verbose or verbose mode 
 void print_nonverbose(TokenList &tokenList)
 {
-	cout << "\n" << "Number of assignment statements: " ;
+	cout << "\n" << "Number of assignment statements: ";
 	getAssignmentStatements(tokenList);
-	printError(tokenList);
-	cout << "\n" << "Number of function declarations: " ; 
-	// tokenList = clippy.getFunctionDeclarations(tokenList);
-	// printTokensClass_NV(tokenList);
+	printBraceError(tokenList);
+	printTypeError(tokenList);
+	cout << "\n" << "Number of function declarations: ";
+	getFunctionDeclarations(tokenList);
+	printTokensTypes_NV(tokenList);
 } // end of print_nonverbose
 
-//Functions that print out the statistics of the input file
-//Gives different data depending on non verbose or verbose mode 
 void print_verbose(TokenList &tokenList)
 {
-	using namespace ensc251_advancedparserclass;
-
-	cout << "\n" << "Number of assignment statements: " ;
+	cout << "\n" << "Number of assignment statements: ";
 	getAssignmentStatements(tokenList);
-	printError(tokenList);
-	cout << "\n" << "Number of function declarations: " ;
-	// tokenList = clippy.getFunctionDeclarations(tokenList);
-	// printTokensClass_V(tokenList);
+	printBraceError(tokenList);
+	printTypeError(tokenList);
+	cout << "\n" << "Number of function declarations: ";
+	getFunctionDeclarations(tokenList);
+	printTokensTypes_V(tokenList);
 } // end of print_verbose
+
+//End of print functions
 
 //Example Test code for interacting with your Token, TokenList, and Tokenizer classes
 //Add your own code to further test the operation of your Token, TokenList, and Tokenizer classes
-int main()
+void main()
 {
+	// Declaration of variables and classes
 	ifstream sourceFile;
 	TokenList tokens;
 	Tokenizer tokenizer;
 	Clippy clippy;
+	unsigned int total_tokens = 0;
+	unsigned int choice = 0;
 
 	//Read in a file line-by-line and tokenize each line
+
 	sourceFile.open("test.cpp");
 	if (!sourceFile.is_open())
 	{
@@ -650,6 +765,7 @@ int main()
 		while (!tokenizer.isComplete())
 		{
 			tokens.append(tokenizer.getNextToken());
+			total_tokens = total_tokens++;
 		}
 		//Re-insert newline that was removed by the getline function
 		tokens.append("\n");
@@ -658,16 +774,10 @@ int main()
 	removeInlineComments(tokens);
 	removeBlockComments(tokens);
 
-	clippy.errorAssistant(tokens);
-
 	/*Test your tokenization of the file by traversing the tokens list and printing out the tokens and the tokens type*/
 	Token *t = tokens.getFirst();
-	//Input choice for verbose or non-verbose statistic or exit 
-	//Prompts user for input depending on what the user wants
-	//The program repeats until the user enters the choice to terminate
-	int choice = 0;
-	int total_tokens = 0;
 
+	//Input choice for verbose or non-verbose statistic or exit 
 	while (1)
 	{
 		cout << "\n""**************** Parser ****************\n\n";
@@ -681,15 +791,13 @@ int main()
 		case 1:
 			//Print non-verbose mode statistics
 			print_nonverbose(tokens);
+			//getAssignmentStatements(tokens);
+			//getFunctionDeclarations(tokens);
 			cout << "\n" << "Total number of tokens: " << total_tokens << endl;
-			tokens = clippy.getFunctionDeclarations(tokens);
-			printTokensClass_NV(tokens);
 			break;
 		case 2:
 			//Print verbose mode statistics
 			print_verbose(tokens);
-			tokens = clippy.getFunctionDeclarations(tokens);
-			printTokensClass_V(tokens);
 			cout << "Total number of tokens: " << total_tokens << endl;
 			break;
 		case 3:
@@ -701,7 +809,7 @@ int main()
 			}
 			t = tokens.getFirst();
 
-			while (t)
+			while (t) 
 			{
 				cout << t->getStringType() << " ";
 				t = t->getNext();
@@ -711,28 +819,8 @@ int main()
 			break;
 		case 4:
 			//Exits the program
+			sourceFile.close();
 			exit(0);
 		}
-	}
-	/*while (t)
-	{
-		cout << t->getStringRep() << " ";
-		t = t->getNext();
-	}
-
-	cout << endl;
-
-	t = tokens.getFirst();
-
-	while (t)
-	{
-		cout << t->getStringClass() << " ";
-		t = t->getNext();
-	}
-	cout << endl;
-
-	// Error and Analysis
-
-	*/
-	return 0;
+	} // end of while loop
 }
