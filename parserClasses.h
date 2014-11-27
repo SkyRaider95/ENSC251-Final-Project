@@ -33,7 +33,7 @@ private:
 	string stringRep; //Token value
     TokenClass stringClass; //Token class (to which class this token belongs to, for e.g. identifier, keywords...etc)
 	string stringType; // Under class, what type of string is it (e.g int, bool, class, union)
-    TokenClass identifier_value; //type of identifier
+    TokenClass identifier_value; //type of identifier --- Jin: StringType is suppose to do this. Also, we may have to check for class, unions and structures
 	//Allow TokenList class to access Token member variables marked private
 	friend class TokenList;
 
