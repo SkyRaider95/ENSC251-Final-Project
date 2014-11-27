@@ -55,7 +55,7 @@ namespace ensc251
 	const int numElement_identifierWords = 8;
 	const int numElement_identifierNames = 53;
 	
-	 const int numElement_tableOfIDtype = 4
+	 const int numElement_tableOfIDtype = 4;
 
   //custom data type:
   enum LexemeType
