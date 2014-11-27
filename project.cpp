@@ -90,7 +90,6 @@ int removeBlockComments(TokenList &tokenList)
 				}
 			}
 		}
-
 		temp = temp->getNext();
 	}
 
@@ -192,4 +191,8 @@ void main()
 			exit(0);
 		}
 	} // end of while loop
+<<<<<<< HEAD
 } // end of main function
+=======
+}
+>>>>>>> origin/master
