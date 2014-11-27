@@ -41,6 +41,8 @@ namespace ensc251
 	const char identifierNames[] = { '_', 'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H',
 		'i', 'I', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T',
         'u', 'U', 'v', 'V' , 'w','W', 'x', 'X', 'y', 'Y', 'z', 'Z' }; // Letters
+        
+        const string tableOfIDtypes[] = { "bool", "int", "float", "string"};
 	
 	const int numElement_tableOfOperators = 19;
 	const int numElement_tableOfPunctuators = 7;
@@ -52,6 +54,8 @@ namespace ensc251
 	const int numElement_numberStuff = 27;
 	const int numElement_identifierWords = 8;
 	const int numElement_identifierNames = 53;
+	
+	 const int numElement_tableOfIDtype = 4
 
   //custom data type:
   enum LexemeType
