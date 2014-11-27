@@ -102,6 +102,7 @@ int removeBlockComments(TokenList &tokenList)
 void main()
 {
 	// Declaration of objects
+
 	ifstream sourceFile;
 	TokenList tokens;
 	Tokenizer tokenizer;

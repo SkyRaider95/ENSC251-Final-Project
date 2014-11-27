@@ -283,4 +283,18 @@ namespace ensc251
 		return false;
 	} // end of isCheckIdentifierKeyWords
 
+	// This function returns TRUE if the input is a library else FALSE
+	bool isLibraryLiteral(const string &lexeme)
+	{
+		// Look for identifier keywords
+		for (int jj = 0; jj != numElement_tableOfDefaultLibraries; jj++)
+		{
+			if (lexeme == tableOfDefaultLibraries[jj])
+			{
+				return true;
+			}
+		}
+		return false;
+	} // end of isLibrary function
+
 } // end of namespace ensc251

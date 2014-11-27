@@ -144,6 +144,11 @@ void TokenList::setTokenClass(Token *token)
 				}
 			}
 
+			else if (isLibraryLiteral(token->stringRep) == true)
+			{
+				token->stringClass = T_Library;
+			}
+
 			else
 			{
 				token->stringClass = T_Unknown;

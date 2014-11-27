@@ -23,39 +23,55 @@ namespace ensc251
 {
 	// Public Variables and tables
 
-	const string tableOfOperators [] = { "+", "-", "/", "*", "=", "<", ">", "++", "--", "<<", ">>", "!=", "&", "&&", "|", "||", "[", "]", "==" }; // Operators
-	const char tableOfPunctuators [] = { ';', ',', '.', '(', ')', '{', '}' }; // Punctuators
+	// Table of operators
+	const string tableOfOperators [] = { "+", "-", "/", "*", "=", "<", ">", "++", "--", "<<", ">>", "!=", "&", "&&", "|", "||", "[", "]", "==", "#"};
+	// Table of Punctuators
+	const char tableOfPunctuators [] = { ';', ',', '.', '(', ')', '{', '}' };
+	// Table of Keywords
 	const string tableOfKeywords [] = { "auto", "bool", "break", "case", "char", "const", "continue", "default", "do", "double", "else",
 		"enum", "extern", "float", "for", "goto", "if", "int", "long", "register", "return", "short", "signed", "sizeof", "static",
 		"struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while", "asm", "_ss", "interrupt", "_cs", "cdecl",
 		"near", "_ds", "far", "pascal", "_es", "huge", "catch", "class", "delete", "friend", "inline", "new", "operator", "overload",
-		"private", "protected", "public", "template", "this", "throw", "try", "virtual"};
-	const string booleanValues [] = { "true", "false" }; // true or false values
-
-	const char hexStuff[] = { '0', 'x', 'X' }; // hex Stuff
-	const char stringStuff[] = { '"' }; // Quotation marks
+		"private", "protected", "public", "template", "this", "throw", "try", "virtual", "include"};
+	// Table of Boolean Values
+	const string booleanValues [] = { "true", "false" };
+	// Table of Hexadecimal Characters
+	const char hexStuff[] = { '0', 'x', 'X' };
+	// Table of stuff that makes string
+	const char stringStuff[] = { '"' };
+	// A table of numbers, including hexadecimals
 	const char numberStuff[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
-		'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'u', 'U', 'l', 'L', '-'}; // Numbers including hexadecimals
-	const char dot = '.'; // Dot. Nuff said
-	const string identifierWords [] = { "int", "float", "double", "bool", "class", "union", "struct", "void" }; // We might use these to identify that the next string after this will be an identifier
-	const char identifierNames[] = { '_', 'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H',
+		'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'u', 'U', 'l', 'L', '-'};
+	// It's a dot. Nuff said
+	const char dot = '.';
+	// Table of letters
+	const char identifierNames [] = { '_', 'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H',
 		'i', 'I', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T',
         'u', 'U', 'v', 'V' , 'w','W', 'x', 'X', 'y', 'Y', 'z', 'Z' }; // Letters
-        
-        const string tableOfIDtypes[] = { "bool", "int", "float", "string"};
+	//Table of Identifier Types
+	const string tableOfIDtypes [] = { "bool", "int", "float", "string" };
+	// Table of default libraries
+	const string tableOfDefaultLibraries [] = { "<algorithm>", "<bitset>", "<cctype>",  "<chrono>", "<cmath>", "<complex>", "<complex deque>",
+		"<condition_variable>", "<cstdio>", "<cstdlib>", "<exception>", "<fstream>", "<functional>", "<future>", "<iomanip>", "<ios>", "<iosfwd>",
+		"<iostream>","<istream>", "<iterator>", "<limits>", "<list>", "<locale>", "<map>", "<memory>", "<mutex>", "<new>", "<numeric>", "<ostream>",
+		"<queue>", "<random>", "<regex>", "<set>", "<sstream>", "<stack>", "<stdexcept>", "<streambuff>", "<string>", "<strstream>","<thread>",
+		"<tuple>", "<typeinfo>", "<utility>", "<valarry>", "<vector>", "<xiosbase>", "<xlocale>", "<xlocinfo>", "<xlocmon>", "<xlocnum>", "<xloctime>",
+		"<xmemory>", "<xstring>", "<xtree>", "<xutility>"};
+	// Table of identifier words
+	const string identifierWords [] = { "int", "double", "float", "string", "bool", "void", "class", "union", "struct" };
 	
-	const int numElement_tableOfOperators = 19;
-	const int numElement_tableOfPunctuators = 7;
-	const int numElement_tableOfKeywords = 60;
-	const int numElement_booleanValues = 2;
+	const int numElement_tableOfOperators = 20; // Number of elements in the table of operators
+	const int numElement_tableOfPunctuators = 7; // Number of elements in the table of punctuators
+	const int numElement_tableOfKeywords = 61; // Number of elements in the table of keywords
+	const int numElement_booleanValues = 2; // Number of elements in the table of boolean values
 
-	const int numElement_hexStuff = 3;
-	const int numElement_stringStuff = 1;
-	const int numElement_numberStuff = 27;
-	const int numElement_identifierWords = 8;
-	const int numElement_identifierNames = 53;
-	
-	 const int numElement_tableOfIDtype = 4;
+	const int numElement_hexStuff = 3;  // Number of elements in the table of hexadecimal values
+	const int numElement_stringStuff = 1;  // Number of elements in the table of string stuff
+	const int numElement_numberStuff = 27;  // Number of elements in the table of numbers
+	const int numElement_identifierNames = 53;  // Number of elements in the table of letters
+	const int numElement_tableOfIDtype = 4; // Number of elements in the table of identifier types
+	const int numElement_tableOfDefaultLibraries = 56; // Number of elements in the table of libraries
+	const int numElement_identifierWords = 9; // Number of elements in the table of identifier words
 
   //custom data type:
   enum LexemeType
@@ -68,7 +84,8 @@ namespace ensc251
 	  T_IntegerLiteral,
 	  T_FloatLiteral,
 	  T_StringLiteral,
-	  T_Unknown                     //if token does not belong to above classes then place it in this category
+	  T_Unknown,                  //if token does not belong to above classes then place it in this category
+	  T_Library
   };
 
   //helper functions: for all of them
@@ -87,6 +104,7 @@ namespace ensc251
   // Own Function
   bool isDigitLiteral(const string&);
   bool isCheckIdentifierKeyWords(const string&);
+  bool isLibraryLiteral(const string&);
 }
 
 #endif /* LEXEMESTYPES_H_ */

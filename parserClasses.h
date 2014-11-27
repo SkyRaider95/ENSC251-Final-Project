@@ -663,6 +663,26 @@ private:
 		return sortTokens.getFirst();
 	} // end of categorizeUnknown
 
+	// Function for categorizing tokens of libraries
+	// Returns a list of libraries
+	Token* categorizeLibraries(TokenList &tokenList)
+	{
+		TokenList sortTokens;
+		Token *temp_Token = tokenList.getFirst();
+		int numOfTokens = 0;
+		while (temp_Token)
+		{
+			if (temp_Token->getStringClass() == T_Library)
+			{
+				sortTokens.append(temp_Token->getStringRep());
+				numOfTokens++;
+			}
+			temp_Token = temp_Token->getNext();
+		}
+		cout << numOfTokens << endl;
+		return sortTokens.getFirst();
+	} // end of categorizeLibraries
+
 	//Functions for printing token values in tokenlists
 
 	// Input: List of tokens
@@ -809,6 +829,16 @@ private:
 		}
 	} // end of printUnknowns
 
+	void printLibraries(TokenList &tokenList)
+	{
+		Token *aListPtr1 = categorizeLibraries(tokenList);
+		while (aListPtr1)
+		{
+			cout << aListPtr1->getStringRep() << " ";
+			aListPtr1 = aListPtr1->getNext();
+		}
+	} // end of printLibraries
+
 	// Prints tokens types in non verbose mode
 	// Gives the total number of tokens in a token type 
 	void printTokensTypes_NV(TokenList &tokenList)
@@ -829,7 +859,9 @@ private:
 		categorizeFloat(tokenList);
 		cout << "Number of strings: ";
 		categorizeString(tokenList);
-		cout << "Number of unknowns; ";
+		cout << "Number of libraries: ";
+		categorizeLibraries(tokenList);
+		cout << "Number of unknowns: ";
 		categorizeUnknown(tokenList);
 	} // end of printTokensType_NV
 
@@ -853,6 +885,8 @@ private:
 		printFloats(tokenList);
 		cout << "\n" << "Number of strings: ";
 		printStrings(tokenList);
+		cout << "\n" << "Number of libraries: ";
+		printLibraries(tokenList);
 		cout << "\n" << "Number of unknowns; ";
 		printUnknowns(tokenList);
 		cout << "\n";
