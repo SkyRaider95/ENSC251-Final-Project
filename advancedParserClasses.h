@@ -76,6 +76,7 @@ namespace ensc251_advancedparserclass
 
 			cout << endl;
 		} // end of printTokenList
+
 		void compareTwo(unsigned int left, unsigned int right, string name)
 		{
 			// More left brackets than right brackets

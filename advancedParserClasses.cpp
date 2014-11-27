@@ -25,44 +25,36 @@ namespace ensc251_advancedparserclass
 	TokenList Clippy::getAssignmentStatements(TokenList &tokenList)
 	{
 		// Creation of Assignment statements
-		TokenList assignment_token; // Tokenlist of all assignment tokens
-		Token *temp_token = tokenList.getFirst(); // Input tokens
-		string temp_string; // Temporary String
-
+		Token *temp_token = tokenList.getFirst();
+		TokenList assignment_token;
+		int numAssignmentStatements = 0;
 		//Traversing through the list
 		while (temp_token)
 		{
-			// Finding the assignment operator
-			for (int ii = 0; ii != numElements_assignmentOperators; ii++)
+			//Checking for assignment operator "="
+			if (temp_token->getStringRep() == "=")
 			{
-				// If an assignment operator is found, the previous token is tokenized
-				if (temp_token->getStringRep() == assignmentOperators[ii])
+				//Adds tokens to the list until it finds the end of the statement;
+				assignment_token.append(temp_token->getPrev());
+				while (temp_token->getStringRep() != ";")
 				{
-					assignment_token.append(temp_token->getPrev());
-
-					//Adds tokens to the list until it finds the end of the statement;
-					while (temp_token->getStringRep() != ";")
+					assignment_token.append(temp_token->getStringRep());
+					temp_token = temp_token->getNext();
+					//When semicolon is found, append it to the list and the loop is over
+					if (temp_token->getStringRep() == ";")
 					{
 						assignment_token.append(temp_token->getStringRep());
-						temp_token = temp_token->getNext();
-
-						//When semicolon is found, append it to the list and the loop is over
-						if (temp_token->getStringRep() == ";")
-						{
-							assignment_token.append(temp_token->getStringRep());
-							numAssignmentStatements = numAssignmentStatements + 1;
-						}
-					} // end of while loop
+						numAssignmentStatements = numAssignmentStatements + 1;
+					}
 				}
 			}
-
 			// Next token 
 			temp_token = temp_token->getNext();
-		} // end of while loop
-
+		}
 		// Return token list;
-		return (assignment_token);
-	} // end of getAssignmentStatements
+		cout << numAssignmentStatements << endl;
+		return assignment_token;
+	}//
 	
 	//Input: a list of tokens
 	//Output: head pointer to the list of function declaration

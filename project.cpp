@@ -658,6 +658,8 @@ int main()
 	removeInlineComments(tokens);
 	removeBlockComments(tokens);
 
+	clippy.errorAssistant(tokens);
+
 	/*Test your tokenization of the file by traversing the tokens list and printing out the tokens and the tokens type*/
 	Token *t = tokens.getFirst();
 	//Input choice for verbose or non-verbose statistic or exit 
@@ -730,7 +732,7 @@ int main()
 	cout << endl;
 
 	// Error and Analysis
-	clippy.errorAssistant(tokens);
+
 	*/
 	return 0;
 }
