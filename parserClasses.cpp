@@ -136,7 +136,37 @@ void TokenList::setTokenClass(Token *token)
 			}
 		}
 	}
+	return;
 }
+
+//Sets identifier_Value for a token depending on strings in a table
+//Used so another function can match an identifier with this value
+void TokenList::setIdentifierValue(Token *token)
+{
+	using namespace ensc251;
+	if (token->stringRep == tableOfIDtypes[0])
+	{
+		token->identifier_value = T_Boolean;
+	}
+	else if (token->stringRep == tableOfIDtypes[1])
+	{
+		token->identifier_value = T_IntegerLiteral;
+	}
+	else if (token->stringRep == tableOfIDtypes[2])
+	{
+		token->identifier_value = T_FloatLiteral;
+	}
+	else if (token->stringRep == tableOfIDtypes[3])
+	{
+		token->identifier_value = T_StringLiteral;
+	}
+	else
+	{
+		token->identifier_value = T_Unknown;
+	}
+	return;
+}//*/
+
 
 //Input: a pointer to a token
 //Output: it won't return anything, but within function, it should set the token type (i.e. token->setStringType(string))
