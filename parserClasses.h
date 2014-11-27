@@ -193,11 +193,12 @@ private:
 			complete = true;
 			return;
 		}
-
-		while ((str->at(offset) == ' ' || str->at(offset) == '\t') && offset < str->length())
+		
+		while ((str->at(offset) == ' ' || str->at(offset) == '\t' || str->at(offset) == '\v') && offset < str->length())
 		{
 			offset++;
-			if (offset == str->length()) {
+			if (offset == str->length())
+			{
 				complete = true;
 				return;
 			}

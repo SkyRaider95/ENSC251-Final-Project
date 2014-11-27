@@ -8,6 +8,7 @@ Steven Luu    301150253
 #include "parserClasses.h"
 #include <iostream>
 #include <fstream>
+#include <cctype> 
 
 using namespace std;
 using namespace ensc251;
@@ -120,23 +121,27 @@ void main()
 	while (!sourceFile.eof())
 	{
 		string lineA, lineB;
-
 		getline(sourceFile, lineA);
 
-		//while the current line ends with a line-continuation \ append the next line to the current line
-		while (lineA[lineA.length() - 1] == '\\')
+		// String is not empty
+		if (!(lineA.empty()))
 		{
-			lineA.erase(lineA.length() - 1, 1);
-			getline(sourceFile, lineB);
-			lineA += lineB;
+			//while the current line ends with a line-continuation \ append the next line to the current line
+			while (lineA[lineA.length() - 1] == '\\')
+			{
+				lineA.erase(lineA.length() - 1, 1);
+				getline(sourceFile, lineB);
+				lineA += lineB;
+			}
+
+			tokenizer.setString(&lineA);
+			while (!tokenizer.isComplete())
+			{
+				tokens.append(tokenizer.getNextToken());
+				total_tokens = total_tokens++;
+			}
 		}
 
-		tokenizer.setString(&lineA);
-		while (!tokenizer.isComplete())
-		{
-			tokens.append(tokenizer.getNextToken());
-			total_tokens = total_tokens++;
-		}
 		//Re-insert newline that was removed by the getline function
 		tokens.append("\n");
 	}
