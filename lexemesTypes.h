@@ -8,7 +8,7 @@ Choong Jin Ng (301226977)
 Steven Luu    (301150253)
 */
 
-// Last edited: 25 Nov 2014, 9.34pm
+// Last edited: 27 Nov 2014, 6am
 
 #ifndef LEXEMESTYPES_H_
 #define LEXEMESTYPES_H_

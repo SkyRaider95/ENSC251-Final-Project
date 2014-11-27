@@ -307,10 +307,12 @@ private:
 			{
 				//function_declaration_token.append(temp_token->getPrev());
 				//Checks for keyword after left parenthesis
-				for (int i = 0; i < ensc251::numElement_tableOfKeywords; i++)
+
+				for (int i = 0; i < ensc251::numElement_identifierWords; i++)
 				{
-					if (temp_token->getNext()->getStringRep() == ensc251::tableOfKeywords[i])
+					if (temp_token->getPrev()->getPrev()->getStringRep() == ensc251::identifierWords[i])
 					{
+						temp_token = temp_token->getPrev();
 						//Adds tokens to the list until it finds the end of the statement;
 						while (temp_token->getStringRep() != ";")
 						{
@@ -332,7 +334,7 @@ private:
 		// Return token list;
 		cout << numFunctionDeclarations << endl;
 		return (function_declaration_token.getFirst());
-	}//*/
+	} // end of getFunctionDeclarations
 
 	//Checks for the order of parenthesis and see if they match
 	//Checks for number of right parenthesis and left parenthesis and see if they match
