@@ -145,7 +145,6 @@ Token* getAssignmentStatements(TokenList &tokenList)
 //Checks for number of right parenthesis and left parenthesis and see if they match
 //Return 0 if everything matches
 //else output error message and tokenlist
-
 Token* checkUnmatchedBrace(TokenList &tokenList)
 {
 	TokenList brace_token;
@@ -235,8 +234,8 @@ Token* checkUnmatchedBrace(TokenList &tokenList)
 	return brace_token.getFirst();;
 }//End of unmatchedBraces
 
-//Functions for categorizing tokens of a type
-//Returns a list of a specific stringType
+//Functions for categorizing tokens of a class
+//Returns a list of a specific stringClass
 Token* categorizeIdentifiers(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -244,7 +243,7 @@ Token* categorizeIdentifiers(TokenList &tokenList)
 	int numOfTokens = 0;
 	while (temp_Token)
 	{
-		if (temp_Token->getStringType() == T_Identifier)
+		if (temp_Token->getStringClass() == T_Identifier)
 		{
 			sortTokens.append(temp_Token->getStringRep());
 			numOfTokens++;
@@ -254,6 +253,9 @@ Token* categorizeIdentifiers(TokenList &tokenList)
 	cout << numOfTokens << endl;
 	return sortTokens.getFirst();
 }
+
+//Functions for categorizing tokens of a class
+//Returns a list of a specific stringClass
 Token* categorizeOperator(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -261,7 +263,7 @@ Token* categorizeOperator(TokenList &tokenList)
 	int numOfTokens = 0;
 	while (temp_Token)
 	{
-		if (temp_Token->getStringType() == T_Operator)
+		if (temp_Token->getStringClass() == T_Operator)
 		{
 			sortTokens.append(temp_Token->getStringRep());
 			numOfTokens++;
@@ -272,6 +274,8 @@ Token* categorizeOperator(TokenList &tokenList)
 	return sortTokens.getFirst();
 }
 
+//Functions for categorizing tokens of a class
+//Returns a list of a specific stringClass
 Token* categorizePunctuator(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -279,7 +283,7 @@ Token* categorizePunctuator(TokenList &tokenList)
 	int numOfTokens = 0;
 	while (temp_Token)
 	{
-		if (temp_Token->getStringType() == T_Punctuator)
+		if (temp_Token->getStringClass() == T_Punctuator)
 		{
 			sortTokens.append(temp_Token->getStringRep());
 			numOfTokens++;
@@ -290,6 +294,8 @@ Token* categorizePunctuator(TokenList &tokenList)
 	return sortTokens.getFirst();
 }
 
+//Functions for categorizing tokens of a class
+//Returns a list of a specific stringClass
 Token* categorizeKeyword(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -297,7 +303,7 @@ Token* categorizeKeyword(TokenList &tokenList)
 	int numOfTokens = 0;
 	while (temp_Token)
 	{
-		if (temp_Token->getStringType() == T_Keyword)
+		if (temp_Token->getStringClass() == T_Keyword)
 		{
 			sortTokens.append(temp_Token->getStringRep());
 			numOfTokens++;
@@ -308,6 +314,8 @@ Token* categorizeKeyword(TokenList &tokenList)
 	return sortTokens.getFirst();
 }
 
+//Functions for categorizing tokens of a class
+//Returns a list of a specific stringClass
 Token* categorizeBoolean(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -315,7 +323,7 @@ Token* categorizeBoolean(TokenList &tokenList)
 	int numOfTokens = 0;
 	while (temp_Token)
 	{
-		if (temp_Token->getStringType() == T_Boolean)
+		if (temp_Token->getStringClass() == T_Boolean)
 		{
 			sortTokens.append(temp_Token->getStringRep());
 			numOfTokens++;
@@ -326,6 +334,8 @@ Token* categorizeBoolean(TokenList &tokenList)
 	return sortTokens.getFirst();
 }
 
+//Functions for categorizing tokens of a class
+//Returns a list of a specific stringClass
 Token* categorizeInteger(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -333,7 +343,7 @@ Token* categorizeInteger(TokenList &tokenList)
 	int numOfTokens = 0;
 	while (temp_Token)
 	{
-		if (temp_Token->getStringType() == T_IntegerLiteral)
+		if (temp_Token->getStringClass() == T_IntegerLiteral)
 		{
 			sortTokens.append(temp_Token->getStringRep());
 			numOfTokens++;
@@ -344,6 +354,8 @@ Token* categorizeInteger(TokenList &tokenList)
 	return sortTokens.getFirst();
 }
 
+//Functions for categorizing tokens of a class
+//Returns a list of a specific stringClass
 Token* categorizeFloat(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -351,7 +363,7 @@ Token* categorizeFloat(TokenList &tokenList)
 	int numOfTokens = 0;
 	while (temp_Token)
 	{
-		if (temp_Token->getStringType() == T_FloatLiteral)
+		if (temp_Token->getStringClass() == T_FloatLiteral)
 		{
 			sortTokens.append(temp_Token->getStringRep());
 			numOfTokens++;
@@ -362,6 +374,8 @@ Token* categorizeFloat(TokenList &tokenList)
 	return sortTokens.getFirst();
 }
 
+//Functions for categorizing tokens of a class
+//Returns a list of a specific stringClass
 Token* categorizeString(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -369,7 +383,7 @@ Token* categorizeString(TokenList &tokenList)
 	int numOfTokens = 0;
 	while (temp_Token)
 	{
-		if (temp_Token->getStringType() == T_StringLiteral)
+		if (temp_Token->getStringClass() == T_StringLiteral)
 		{
 			sortTokens.append(temp_Token->getStringRep());
 			numOfTokens++;
@@ -380,6 +394,8 @@ Token* categorizeString(TokenList &tokenList)
 	return sortTokens.getFirst();
 }
 
+//Functions for categorizing tokens of a class
+//Returns a list of a specific stringClass
 Token* categorizeUnknown(TokenList &tokenList)
 {
 	TokenList sortTokens;
@@ -387,7 +403,7 @@ Token* categorizeUnknown(TokenList &tokenList)
 	int numOfTokens = 0;
 	while (temp_Token)
 	{
-		if (temp_Token->getStringType() == T_Unknown)
+		if (temp_Token->getStringClass() == T_Unknown)
 		{
 			sortTokens.append(temp_Token->getStringRep());
 			numOfTokens++;
@@ -409,6 +425,7 @@ void printAssignment(TokenList &tokenList)
 	}
 }//*/
 
+// Print all the errors
 void printError(TokenList &tokenList)
 {
 	Token *aListPtr1 = checkUnmatchedBrace(tokenList);
@@ -417,8 +434,9 @@ void printError(TokenList &tokenList)
 		cout << aListPtr1->getStringRep() << " ";
 		aListPtr1 = aListPtr1->getNext();
 	}
-}//*/
+} // end of printError
 
+// Print identifiers
 void printIdentifiers(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizeIdentifiers(tokenList);
@@ -427,8 +445,9 @@ void printIdentifiers(TokenList &tokenList)
 		cout << aListPtr1->getStringRep() << " ";
 		aListPtr1 = aListPtr1->getNext();
 	}
-}//*/
+} // end of printIdentifiers
 
+// Print Operators
 void printOperators(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizeOperator(tokenList);
@@ -439,6 +458,7 @@ void printOperators(TokenList &tokenList)
 	}
 }
 
+// Print
 void printPunctuators(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizePunctuator(tokenList);
@@ -448,6 +468,8 @@ void printPunctuators(TokenList &tokenList)
 		aListPtr1 = aListPtr1->getNext();
 	}
 }
+
+// Print
 void printKeywords(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizeKeyword(tokenList);
@@ -457,6 +479,8 @@ void printKeywords(TokenList &tokenList)
 		aListPtr1 = aListPtr1->getNext();
 	}
 }
+
+// Print
 void printBoolean(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizeBoolean(tokenList);
@@ -466,6 +490,8 @@ void printBoolean(TokenList &tokenList)
 		aListPtr1 = aListPtr1->getNext();
 	}
 }
+
+// Print
 void printIntegers(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizeInteger(tokenList);
@@ -475,6 +501,8 @@ void printIntegers(TokenList &tokenList)
 		aListPtr1 = aListPtr1->getNext();
 	}
 }
+
+// Print
 void printFloats(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizeFloat(tokenList);
@@ -484,6 +512,8 @@ void printFloats(TokenList &tokenList)
 		aListPtr1 = aListPtr1->getNext();
 	}
 }
+
+// Print
 void printStrings(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizeString(tokenList);
@@ -493,6 +523,8 @@ void printStrings(TokenList &tokenList)
 		aListPtr1 = aListPtr1->getNext();
 	}
 }
+
+// Print
 void printUnknowns(TokenList &tokenList)
 {
 	Token *aListPtr1 = categorizeUnknown(tokenList);
@@ -503,9 +535,9 @@ void printUnknowns(TokenList &tokenList)
 	}
 }
 
-//Prints tokens types in non verbose mode
-//Gives the total number of tokens in a token type 
-void printTokensTypes_NV(TokenList &tokenList)
+// Prints tokens types in non verbose mode
+// Gives the total number of tokens in a token type 
+void printTokensClass_NV(TokenList &tokenList)
 {
 	cout << "\n" << "Number of identifiers: ";
 	categorizeIdentifiers(tokenList);
@@ -525,11 +557,11 @@ void printTokensTypes_NV(TokenList &tokenList)
 	categorizeString(tokenList);
 	cout << "Number of unknowns; ";
 	categorizeUnknown(tokenList);
-}
+} // end of printTokensTypes_NV
 
 //Prints tokens types in verbose mode
 //Gives the total number of tokens in a token type  and prints tokens that belong to this category
-void printTokensTypes_V(TokenList &tokenList)
+void printTokensClass_V(TokenList &tokenList)
 {
 	cout << "\n" << "Number of identifiers: ";
 	printIdentifiers(tokenList);
@@ -550,7 +582,8 @@ void printTokensTypes_V(TokenList &tokenList)
 	cout << "\n" << "Number of unknowns; ";
 	printUnknowns(tokenList);
 	cout << "\n";
-}
+} // end of printTokenTypes_V
+
 //Functions that print out the statistics of the input file
 //Gives different data depending on non verbose or verbose mode 
 void print_nonverbose(TokenList &tokenList)
@@ -559,19 +592,23 @@ void print_nonverbose(TokenList &tokenList)
 	getAssignmentStatements(tokenList);
 	printError(tokenList);
 	cout << "\n" << "Number of function declarations: " ; 
-	getFunctionDeclarations(tokenList);
-	printTokensTypes_NV(tokenList);
-}
+	tokenList = clippy.getFunctionDeclarations(tokenList);
+	printTokensClass_NV(tokenList);
+} // end of print_nonverbose
 
+//Functions that print out the statistics of the input file
+//Gives different data depending on non verbose or verbose mode 
 void print_verbose(TokenList &tokenList)
 {
+	using namespace ensc251_advancedparserclass;
+
 	cout << "\n" << "Number of assignment statements: " ;
 	getAssignmentStatements(tokenList);
 	printError(tokenList);
 	cout << "\n" << "Number of function declarations: " ;
-	getFunctionDeclarations(tokenList);
-	printTokensTypes_V(tokenList);
-}
+	tokenList = clippy.getFunctionDeclarations(tokenList);
+	printTokensClass_V(tokenList);
+} // end of print_verbose
 
 
 //Example Test code for interacting with your Token, TokenList, and Tokenizer classes
@@ -623,6 +660,8 @@ int main()
 	//Prompts user for input depending on what the user wants
 	//The program repeats until the user enters the choice to terminate
 	int choice = 0;
+	int total_tokens = 0;
+
 	while (1)
 	{
 		cout << "\n""**************** Parser ****************\n\n";

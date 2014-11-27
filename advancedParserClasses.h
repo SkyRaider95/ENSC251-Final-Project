@@ -53,7 +53,7 @@ namespace ensc251_advancedparserclass
 		
 		// Private Functions
 		TokenList getAssignmentStatements(TokenList &tokenList);
-		TokenList getFunctionDeclarations(TokenList &tokenList);
+
 
 		// Input: TokenList needed to be printed to the screen
 		// Output: Prints the TokenList to the screen. If TokenList is empty, it will say that it is empty
@@ -84,12 +84,14 @@ namespace ensc251_advancedparserclass
 		Clippy();
 		void errorAssistant(TokenList &tokenList);
 
+		TokenList getFunctionDeclarations(TokenList &tokenList);
+
 		void checkFunctionDeclaration();
 		void checkFunctionImplementation();
 		bool checkConditionalStatement(const string &str);
 		bool checkJumpConditional(const string &str);
 		bool includeStatement(const string &str);
-		int checkSecondHalf(TokenList &tokenList, int previous_error);
+		void checkSecondHalf(const Token *read_token);
 	}; // end of Class Clippy
 
 } // end of namespace ensc251_advancedparserclass

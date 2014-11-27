@@ -186,6 +186,8 @@ namespace ensc251_advancedparserclass
 			temp_stringClass = temp_token->getStringClass();
 			temp_stringType = temp_token->getStringType();
 
+			checkSecondHalf(temp_token);
+
 			// Unknown
 			if (temp_stringClass == 9)
 			{
@@ -306,37 +308,40 @@ namespace ensc251_advancedparserclass
 		return true;
 	} // end of includeStatement
 
-	// Input: Tokenlist to search for punctuators
-	// Output: Returns the number of errors, if any.
-	// NOTE: This is a recursive function
-	int Clippy::checkSecondHalf(TokenList &tokenList, int previous_error)
+	// Input: Token to read the string
+	// Output: Nothing but it changes the number of parenthesis so far
+	void Clippy::checkSecondHalf(const Token *read_token)
 	{
-		// Declaration of Variables
-		int number_of_errors = previous_error;
-		TokenList temp_tokenList = tokenList;
-		Token *temp_token = tokenList.getFirst();
 
-		if (temp_token->getStringRep() == "(")
+		if (read_token->getStringRep() == "(")
 		{
-			number_of_errors = number_of_errors + 1;
+			numLeftParenthesis = numLeftParenthesis + 1;
 		}
 
-		if (temp_token->getStringRep() == ")")
+		else if (read_token->getStringRep() == ")")
 		{
-			number_of_errors = number_of_errors - 1;
+			numRightParenthesis = numRightParenthesis + 1;
 		}
 
-		if (temp_token->getStringRep() == "<")
+		else if (read_token->getStringRep() == "[")
 		{
-			number_of_errors = number_of_errors - 1;
+			numLeftBracket = numLeftBracket + 1;
 		}
 
-		if (temp_token->getStringRep() == ">")
+		else if (read_token->getStringRep() == "]")
 		{
-			number_of_errors = number_of_errors - 1;
+			numRightBracket = numRightBracket + 1;
 		}
 
-		return (number_of_errors);
+		else if (read_token->getStringRep() == "{")
+		{
+			numLeftCurly = numLeftCurly + 1;
+		}
+
+		else if (read_token->getStringRep() == "}")
+		{
+			numRightCurly = numRightCurly + 1;
+		}
 		
 	} // end of checksecondHalf
 
