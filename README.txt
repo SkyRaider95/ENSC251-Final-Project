@@ -20,7 +20,12 @@ Steven: I sent you an email of the version of the project I intend to submit sin
 	
 	If we had more time we might've been able to resolve these issue but since almost everything in the program revolves
 	around getAssignmentStatements I would rather hand in one that works but not for all case.
+
 Jin:	We should work in resolving the issues with whitespaces and when there is a 0.
+		It must be in parserClasses before what we did recently (assignment 2/ assignment 3).
+
+		Also, we discovered that there is a bug where it does not recognise functions.
+		Also, there is a bug where it does not recognise libraries.
 
 Part 1:
 Jin:	Mostly done, TA pointed out that this does not work if (bla bla) a = 0 (resolved)

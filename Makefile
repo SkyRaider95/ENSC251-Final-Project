@@ -3,7 +3,7 @@ APPS = Final Project
 #Change to your own student number
 STUDENT_NUMBER = 301150253
 
-OBJECTS = lexemesTypes.o parserClasses.o assignment3.o
+OBJECTS = lexemesTypes.o parserClasses.o project.o
 HEADERS = lexemesTypes.h parserClasses.h
 
 #Debug flag
