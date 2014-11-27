@@ -162,6 +162,9 @@ public:
 	//Output: it won't return anything, but within function, it should set the token class (i.e. token->stringClass)
 	//NOTE: DOES NOT DO ANYTHING RIGHT NOW
 	void setTokenType(Token *token);
+	
+	//If the token is an identifier, its value is set to a type
+	void setIdentifierValue(Token *token);
 };
 
 //A class for tokenizing a string of C++  code into tokens
