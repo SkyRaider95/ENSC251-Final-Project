@@ -25,12 +25,13 @@ Part 3:
 Jin:	For this part, I'm thinking we check through for any syntax errors first, then check for any other types of errors (Yes)
 
 Steven:	Added function that checks for syntax error on braces
-	Added non-verbose and verbose modes to project.cpp 
+	Added non-verbose and verbose modes to project.cpp (Jin: I will turn them into advancedParserClasses)
 	Added functions that calculate and gives statistics back to the user
 	Functions appear to be working properly
 	Currently working on unmatched types
 Bonus:
 
 Misc:
-I found the bug. It happens when test.cpp has "int a = 0". However, when I tried "int a = 1", it works. (unresolved)
-Also, if there is empty space, the program will fail.
+Jin:
+	I found the bug. It happens when test.cpp has "int a = 0". However, when I tried "int a = 1", it works. (unresolved)
+	Also, if there is whitespace, the program will fail.

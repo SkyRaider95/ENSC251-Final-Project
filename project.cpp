@@ -592,8 +592,8 @@ void print_nonverbose(TokenList &tokenList)
 	getAssignmentStatements(tokenList);
 	printError(tokenList);
 	cout << "\n" << "Number of function declarations: " ; 
-	tokenList = clippy.getFunctionDeclarations(tokenList);
-	printTokensClass_NV(tokenList);
+	// tokenList = clippy.getFunctionDeclarations(tokenList);
+	// printTokensClass_NV(tokenList);
 } // end of print_nonverbose
 
 //Functions that print out the statistics of the input file
@@ -606,8 +606,8 @@ void print_verbose(TokenList &tokenList)
 	getAssignmentStatements(tokenList);
 	printError(tokenList);
 	cout << "\n" << "Number of function declarations: " ;
-	tokenList = clippy.getFunctionDeclarations(tokenList);
-	printTokensClass_V(tokenList);
+	// tokenList = clippy.getFunctionDeclarations(tokenList);
+	// printTokensClass_V(tokenList);
 } // end of print_verbose
 
 
@@ -678,20 +678,27 @@ int main()
 			//getAssignmentStatements(tokens);
 			//getFunctionDeclarations(tokens);
 			cout << "\n" << "Total number of tokens: " << total_tokens << endl;
+			tokens = clippy.getFunctionDeclarations(tokens);
+			printTokensClass_NV(tokens);
 			break;
 		case 2:
 			//Print verbose mode statistics
 			print_verbose(tokens);
+			tokens = clippy.getFunctionDeclarations(tokens);
+			printTokensClass_V(tokens);
 			cout << "Total number of tokens: " << total_tokens << endl;
 			break;
 		case 3:
 			//Traverses through the token list and prints out tokens and token types
-			while (t) {
+			while (t)
+			{
 				cout << t->getStringRep() << " ";
 				t = t->getNext();
 			}
 			t = tokens.getFirst();
-			while (t) {
+
+			while (t)
+			{
 				cout << t->getStringType() << " ";
 				t = t->getNext();
 			}
