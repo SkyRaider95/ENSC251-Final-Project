@@ -92,7 +92,6 @@ int removeBlockComments(TokenList &tokenList)
 				}
 			}
 		}
-
 		temp = temp->getNext();
 	}
 
