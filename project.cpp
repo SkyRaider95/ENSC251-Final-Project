@@ -140,6 +140,100 @@ Token* getAssignmentStatements(TokenList &tokenList)
 	return (assignment_token.getFirst());
 } // end of getAssignmentStatements
 
+//Checks for the order of parenthesis and see if they match
+//Checks for number of right parenthesis and left parenthesis and see if they match
+//Return 0 if everything matches
+//else output error message and tokenlist
+
+Token* checkUnmatchedBrace(TokenList &tokenList)
+{
+	TokenList brace_token;
+	Token *temp_token = tokenList.getFirst();
+	//Counter for each brace
+	int right_braces = 0;
+	int left_braces = 0;
+	//Checks the tokenlist for matching parenthesis
+	while (temp_token)
+	{
+		bool matchedBraces = false;
+		//Checking for left parenthesis
+		if (temp_token->getStringRep() == "(")
+		{
+			//Checks for right parenthesis
+			while (matchedBraces == false)
+			{
+				brace_token.append(temp_token->getStringRep());
+				//Found right parenthesis
+				if (temp_token->getNext()->getStringRep() == ")")
+				{
+					brace_token.append(temp_token->getNext()->getStringRep());
+					//temp_token = temp_token->getNext();
+					//cout << "\n" << "found" << endl;
+					matchedBraces = true;
+				}
+				//Increment to next token
+				temp_token = temp_token->getNext();
+				//End of list, matching parenthesis not found
+				if (temp_token->getNext() == NULL)
+				{
+					cout << "\n" << "Error: Unmatched braces";
+					return brace_token.getFirst();
+				}
+			}
+		}
+		else
+		{
+			brace_token.append(temp_token->getStringRep());
+		}
+		// Next token 
+		temp_token = temp_token->getNext();
+	}//*/
+	
+	//Proceeds to check for the number of braces
+	if (temp_token == NULL)
+	{ 
+		TokenList brace_token1;
+		Token *temp_token = tokenList.getFirst();
+		while (temp_token->getNext() != NULL)
+		{
+			bool rightNumber = false;
+
+			while (rightNumber == false)
+			{
+				brace_token1.append(temp_token->getStringRep());
+				if (temp_token->getStringRep() == "(")
+				{
+					left_braces++;
+				}
+				if (temp_token->getStringRep() == ")")
+				{
+					right_braces++;
+				}
+				//End of the list
+				if (temp_token->getNext() == NULL)
+				{
+					//Number of braces matches
+					if (left_braces == right_braces)
+					{
+						rightNumber = true;
+						return 0;
+					}
+					else //if (left_braces != right_braces)
+					{
+						cout << "Error: Unmatched braces" << endl;
+						return brace_token1.getFirst();
+					}
+				}
+				// Next token 
+				temp_token = temp_token->getNext();
+			}
+			// Next token 
+			temp_token = temp_token->getNext();
+		}
+	}
+	return brace_token.getFirst();;
+}//End of unmatchedBraces
+
 //Example Test code for interacting with your Token, TokenList, and Tokenizer classes
 //Add your own code to further test the operation of your Token, TokenList, and Tokenizer classes
 int main()
