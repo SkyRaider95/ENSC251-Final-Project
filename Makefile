@@ -1,10 +1,10 @@
-APPS = assignment3
+APPS = Final Project
 
 #Change to your own student number
 STUDENT_NUMBER = 301226977
 
-OBJECTS = lexemesTypes.o parserClasses.o assignment3.o
-HEADERS = lexemesTypes.h parserClasses.h
+OBJECTS = lexemesTypes.o parserClasses.o assignment3.o advancerParserClasses.o
+HEADERS = lexemesTypes.h parserClasses.h advancerParserClasses.h
 
 #Debug flag
 CXXFLAGS += -g
