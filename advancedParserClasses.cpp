@@ -52,13 +52,13 @@ namespace ensc251_advancedparserclass
 							assignment_token.append(temp_token->getStringRep());
 							numAssignmentStatements = numAssignmentStatements + 1;
 						}
-					}
+					} // end of while loop
 				}
 			}
 
 			// Next token 
 			temp_token = temp_token->getNext();
-		}
+		} // end of while loop
 
 		// Return token list;
 		return (assignment_token);
@@ -156,7 +156,7 @@ namespace ensc251_advancedparserclass
 	}
 
 	// Default constructor
-	Clippy::Clippy() : syntaxError_Found(false), logicError_Found(false), functionDecError_Found(false), functionImpError_Found(false), endQuote(true)
+	Clippy::Clippy() : syntaxError_Found(false), logicError_Found(false), functionDecError_Found(false), functionImpError_Found(false), finishedProcess(false)
 	{
 		numAssignmentStatements  = 0; // Number of assignment statements
 		numFunctionDeclarations = 0; // Number of functions
@@ -186,8 +186,6 @@ namespace ensc251_advancedparserclass
 			temp_stringClass = temp_token->getStringClass();
 			temp_stringType = temp_token->getStringType();
 
-			checkSecondHalf(temp_token);
-
 			// Unknown
 			if (temp_stringClass == 9)
 			{
@@ -196,6 +194,7 @@ namespace ensc251_advancedparserclass
 			temp_stringRep.clear();
 
 			numTokensParsed = numTokensParsed + 1;
+			checkSecondHalf(temp_token);
 			temp_token = temp_token->getNext();
 		} // end of while loop
 
@@ -310,9 +309,9 @@ namespace ensc251_advancedparserclass
 
 	// Input: Token to read the string
 	// Output: Nothing but it changes the number of parenthesis so far
+	// It will output the number of errors relating the parenthesis if the next token is NULL
 	void Clippy::checkSecondHalf(const Token *read_token)
 	{
-
 		if (read_token->getStringRep() == "(")
 		{
 			numLeftParenthesis = numLeftParenthesis + 1;
@@ -341,6 +340,20 @@ namespace ensc251_advancedparserclass
 		else if (read_token->getStringRep() == "}")
 		{
 			numRightCurly = numRightCurly + 1;
+		}
+
+		// Next token is null
+		if (read_token->getNext() == NULL)
+		{
+			// Errors for brackets, parenthesis and curly brackets respectively
+			compareTwo(numLeftBracket, numRightBracket, "bracket");
+			compareTwo(numLeftParenthesis, numRightParenthesis, "parenthesis");
+			compareTwo(numLeftCurly, numRightCurly, "curly bracket");
+
+			// Setting them to equal each other (no need to put to zero)
+			numLeftBracket = numRightBracket;
+			numLeftParenthesis = numRightParenthesis;
+			numLeftCurly = numRightCurly;
 		}
 		
 	} // end of checksecondHalf

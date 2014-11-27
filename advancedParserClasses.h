@@ -37,24 +37,23 @@ namespace ensc251_advancedparserclass
 		bool logicError_Found; // True if a logic error is found
 		bool functionDecError_Found; // True if a function declaration error is found
 		bool functionImpError_Found; // True if a function implementation error is found
-		bool endQuote; // When false, it is the end of a quote or not a quote (e.g "). When true, it is inside a quote
+		bool finishedProcess; // When true, finished processing the entire file. When false, program hasn't finished processing
 		int numAssignmentStatements; // Number of assignment statements
 		int numFunctionDeclarations; // Number of functions
 		int numTokensParsed; // Number of tokens parsed
 		int numSyntaxError_Found; // Number of syntax errors found
 		int numUnknown; // Number of unknown types
 
-		int numLeftParenthesis; // Indicates the number of left parenthesis '('
-		int numRightParenthesis; // Indicates the number of right parenthesis ')'
-		int numLeftBracket; // Indicates the number of left brackets '['
-		int numRightBracket; // Indicates the number of right brackets ']'
-		int numLeftCurly; // Indicates the number of left curly brackets '{'
-		int numRightCurly; // Indicates the number of right curly brackets '}'
+		unsigned int numLeftParenthesis; // Indicates the number of left parenthesis '('
+		unsigned int numRightParenthesis; // Indicates the number of right parenthesis ')'
+		unsigned int numLeftBracket; // Indicates the number of left brackets '['
+		unsigned int numRightBracket; // Indicates the number of right brackets ']'
+		unsigned int numLeftCurly; // Indicates the number of left curly brackets '{'
+		unsigned int numRightCurly; // Indicates the number of right curly brackets '}'
 		
 		// Private Functions
 		TokenList getAssignmentStatements(TokenList &tokenList);
-
-
+		
 		// Input: TokenList needed to be printed to the screen
 		// Output: Prints the TokenList to the screen. If TokenList is empty, it will say that it is empty
 		// NOTE: Does not change the TokenList itself
@@ -76,7 +75,21 @@ namespace ensc251_advancedparserclass
 			}
 
 			cout << endl;
-		}
+		} // end of printTokenList
+		void compareTwo(unsigned int left, unsigned int right, string name)
+		{
+			// More left brackets than right brackets
+			if (left > right)
+			{
+				cout << "The number of errors relating to " << name << " are: " << (left - right) << endl;
+			}
+
+			// More right brackets than left brackets
+			else if (right < left)
+			{
+				cout << "The number of errors relating to " << name << " are: " << (right - left) << endl;
+			}
+		} // end of compareTwo
 		Token* getUserDefined(TokenList &tokenList);
 		void setIdentifierClass(Token *identifier_type, string Type);
 		void LogicStatements();

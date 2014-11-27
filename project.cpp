@@ -675,8 +675,6 @@ int main()
 		case 1:
 			//Print non-verbose mode statistics
 			print_nonverbose(tokens);
-			//getAssignmentStatements(tokens);
-			//getFunctionDeclarations(tokens);
 			cout << "\n" << "Total number of tokens: " << total_tokens << endl;
 			tokens = clippy.getFunctionDeclarations(tokens);
 			printTokensClass_NV(tokens);
