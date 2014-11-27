@@ -7,6 +7,8 @@ Author: Choong Jin Ng (301226977)
 
 Credits to: Daryl and Jason, for allowing us to modify their parcer class for this assignment
 
+MAKEFILE: We need to input our student number BEFORE we submit it individually.
+
 General:
 Jin:	I'm thinking of implementing a new header file and a new cpp to implement the features of the compiler.
 		No point creating a huge class for everything. What do you think? I created advancedParserClasses for this purpose.
