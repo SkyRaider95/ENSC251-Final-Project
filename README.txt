@@ -8,6 +8,7 @@ Author: Choong Jin Ng (301226977)
 Credits to: Daryl and Jason, for allowing us to modify their parcer class for this assignment
 
 MAKEFILE: We need to input our student number BEFORE we submit it individually.
+	Steven: Yea that was my mistake, I wasn't thinking properly.
 
 General:
 Jin:	I'm thinking of implementing a new header file and a new cpp to implement the features of the compiler.
@@ -40,6 +41,11 @@ Steven:	Added function that checks for syntax error on braces
 Bonus:
 
 Misc:
+Steven: I sent you an email with my files for the project so far. This version works but has a couple of bugs with the getAssignmentStatementss.
+		and with whitespace.
+		I think this version should be used as a last resort as we don't have much time to finish this
+		and this version is able to compile, run and works for several cases.
+		
 Jin:	I found the bug. It happens when test.cpp has "int a = 0". However, when I tried "int a = 1", it works. (unresolved)
 		Also, if there is whitespace, the program will fail. (unresolved)
 		When I input once, it prints but no values show up. Only tranverse actually works.
