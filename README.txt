@@ -7,9 +7,6 @@ Author: Choong Jin Ng (301226977)
 
 Credits to: Daryl and Jason, for allowing us to modify their parcer class for this assignment
 
-MAKEFILE: We need to input our student number BEFORE we submit it individually.
-	Steven: Yea that was my mistake, I wasn't thinking properly.
-
 General:
 Jin:	I'm thinking of implementing a new header file and a new cpp to implement the features of the compiler.
 		No point creating a huge class for everything. What do you think? I created advancedParserClasses for this purpose.
@@ -23,6 +20,7 @@ Steven: I sent you an email of the version of the project I intend to submit sin
 	
 	If we had more time we might've been able to resolve these issue but since almost everything in the program revolves
 	around getAssignmentStatements I would rather hand in one that works but not for all case.
+Jin:	We should work in resolving the issues with whitespaces and when there is a 0.
 
 Part 1:
 Jin:	Mostly done, TA pointed out that this does not work if (bla bla) a = 0 (resolved)
@@ -37,8 +35,6 @@ Jin	:
 
 Part 3:
 Jin:	For this part, I'm thinking we check through for any syntax errors first, then check for any other types of errors (Yes)
-		For the matching braces part, I am thinking of doing such that when analyzing assignment statements, it will check for the braces.
-		This might be better since we don't need to loop unnecessary. Also, we don't want the program to stop at every error
 
 Steven:	Added function that checks for syntax error on braces
 	Added non-verbose and verbose modes to project.cpp (Jin: I will turn them into advancedParserClasses)
@@ -55,5 +51,3 @@ Steven: I sent you an email with my files for the project so far. This version w
 		
 Jin:	I found the bug. It happens when test.cpp has "int a = 0". However, when I tried "int a = 1", it works. (unresolved)
 		Also, if there is whitespace, the program will fail. (unresolved)
-		When I input once, it prints but no values show up. Only tranverse actually works.
-		When I input again, it breaks. (unresolved)
