@@ -1,7 +1,6 @@
 APPS = Final Project
 
 #Change to your own student number
-STUDENT_NUMBER = 301226977
 STUDENT_NUMBER = 301150253
 
 OBJECTS = lexemesTypes.o parserClasses.o assignment3.o advancerParserClasses.o
