@@ -118,6 +118,10 @@ void TokenList::setTokenClass(Token *token)
 			{
 				token->stringClass = T_Identifier;
 			}
+			else if (isStringLiteral(token->stringRep) == true)
+			{
+				token->stringClass = T_StringLiteral;
+			}
 			else if (isFloatLiteral(token->stringRep) == true)
 			{
 				token->stringClass = T_FloatLiteral;
@@ -125,10 +129,6 @@ void TokenList::setTokenClass(Token *token)
 			else if (isIntegerLiteral(token->stringRep) == true)
 			{
 				token->stringClass = T_IntegerLiteral;
-			}
-			else if (isStringLiteral(token->stringRep) == true)
-			{
-				token->stringClass = T_StringLiteral;
 			}
 			else
 			{
