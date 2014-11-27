@@ -22,6 +22,7 @@ Steven: getAssignmentStatements function doesn't quite meet the specification of
 Jin:	Agreed.
 Part 2:
 Steven:	Currently working on a bug in giving back the number of function declaration 
+		Bug source is due to getAssignment Statements
 Jin	:	
 
 Part 3:
@@ -33,7 +34,7 @@ Steven:	Added function that checks for syntax error on braces
 	Added non-verbose and verbose modes to project.cpp (Jin: I will turn them into advancedParserClasses)
 	Added functions that calculate and gives statistics back to the user
 	Functions appear to be working properly
-	Currently working on unmatched types
+	(Finish but only works with bool, int, float, and strings)Currently working on unmatched types 
 Bonus:
 
 Misc:
