@@ -33,7 +33,7 @@ private:
 	string stringRep; //Token value
     TokenClass stringClass; //Token class (to which class this token belongs to, for e.g. identifier, keywords...etc)
 	string stringType; // Under class, what type of string is it (e.g int, bool, class, union)
-
+    TokenClass identifier_value; //type of identifier
 	//Allow TokenList class to access Token member variables marked private
 	friend class TokenList;
 
@@ -102,6 +102,17 @@ public:
 	void setStringType(const string& stringType)
 	{
 		this->stringType = stringType;
+	}
+	//Return the Token's identifier value
+	const TokenClass getID_value()const
+	{
+		return identifier_value;
+	}
+
+	//Sets the Token's identifier value
+	void setID_value(const TokenClass& ID_value)
+	{
+		this->identifier_value = ID_value;
 	}
 };
 
